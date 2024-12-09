@@ -1,13 +1,13 @@
 import React from 'react';
-import { Box, Button, Container, Typography, Tabs, Tab, Stack, Chip } from '@mui/material';
+import { Box, Container, Typography, Tabs, Tab, Stack, Chip } from '@mui/material';
 import ImageGridReading from '../component/ImageGridReading';
 
-type Props = {};
+
 
 const Reading = () => {
     const [value, setValue] = React.useState(0);
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
 

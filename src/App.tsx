@@ -1,12 +1,11 @@
 
-import React from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Home from './pages/Home'
 import AppLayout from './component/AppLayout'
 import Writing from './pages/Writing'
 import Reading from './pages/Reading'
-type Props = {}
 
 
 const RouterMain = () => {
@@ -23,7 +22,7 @@ const RouterMain = () => {
   )
 }
 
-const App = (props: Props) => {
+const App = () => {
   return (
     <RouterMain />
   )

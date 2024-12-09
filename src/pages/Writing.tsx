@@ -4,14 +4,10 @@ import {
     Typography,
     Container,
     Button,
-    IconButton,
-    Grid,
     Paper,
     MenuItem,
     Select,
     Avatar,
-    Divider,
-    Icon,
     Tabs,
     Tab,
 } from '@mui/material';
@@ -19,14 +15,13 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ListIcon from '@mui/icons-material/List';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
 import { LiaPenNibSolid } from "react-icons/lia";
 import { MdEditNote } from "react-icons/md";
 import { MdManageSearch } from "react-icons/md";
 const WritingPage = () => {
     const [value, setValue] = React.useState(0);
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
     return (

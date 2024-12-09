@@ -1,7 +1,5 @@
 import { Box, Typography, ImageList, ImageListItem, Chip } from '@mui/material';
-import React from 'react';
 
-type Props = {}
 
 const mockData = [
     {
@@ -91,7 +89,7 @@ const mockData = [
     // Add more items as needed
 ];
 
-const ImageGridReading = (props: Props) => {
+const ImageGridReading = () => {
     return (
         <Box>
             {/* Section Title */}

@@ -1,11 +1,11 @@
-import React from 'react';
-import { Box, Typography, Button, Container } from '@mui/material';
+
+import { Box, Typography, Container } from '@mui/material';
 import ImageSlidView from '../component/ImageSlidView';
 import Divider from '@mui/material/Divider';
 import ImageGrid from '../component/ImageGrid';
 
-type Props = {}
-const Home = (props: Props) => {
+
+const Home = () => {
     return (
         <Box>
             <Divider />

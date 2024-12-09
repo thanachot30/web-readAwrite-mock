@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Box, Typography } from '@mui/material';
-type Props = {}
+import { Box } from '@mui/material';
+
 const imageData = [
     {
         image: 'https://via.placeholder.com/300x150', // Replace with actual image URL
@@ -37,7 +37,7 @@ const imageData = [
         subtitle: 'Food Support',
     },
 ];
-const ImageSlidView = (props: Props) => {
+const ImageSlidView = () => {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {

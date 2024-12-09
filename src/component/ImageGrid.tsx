@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Box, Typography, IconButton, ImageList, ImageListItem } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Link } from 'react-router-dom';
 import InfoImageGrid from './InfoImageGrid';
 
-type Props = {};
+
 const gridData = [
     {
         image: 'https://via.placeholder.com/150',
@@ -123,7 +123,7 @@ const gridData = [
 
 const iconSize = 8
 
-const ImageGrid = (props: Props) => {
+const ImageGrid = () => {
     const scrollContainerRef = useRef<HTMLUListElement | null>(null);
 
     const scroll = (direction: 'left' | 'right') => {

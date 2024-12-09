@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { AppBar, Toolbar, Typography, IconButton, Box, Container } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -6,11 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
-
-
-type Props = {}
-
-const AppLayout = (props: Props) => {
+const AppLayout = () => {
     const navigate = useNavigate();
     return (
         <Box>
