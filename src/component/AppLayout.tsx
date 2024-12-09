@@ -4,13 +4,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import EditIcon from '@mui/icons-material/Edit';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 
 
 type Props = {}
 
 const AppLayout = (props: Props) => {
+    const navigate = useNavigate();
     return (
         <Box>
             <AppBar position="static" color="default" elevation={0} sx={{ borderBottom: '1px solid #e0e0e0' }}>
@@ -30,7 +31,16 @@ const AppLayout = (props: Props) => {
                         </Box>
 
                         {/* Center Section */}
-                        <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#00C8FF' }}>
+                        <Typography
+                            component={Link} // Use Link for navigation
+                            to="/" // Navigate to '/'
+                            variant="h5"
+                            sx={{
+                                fontWeight: 'bold',
+                                color: '#00C8FF',
+                                textDecoration: 'none', // Remove underline for the link
+                                cursor: 'pointer',
+                            }}>
                             READAWRITE
                         </Typography>
 
@@ -42,7 +52,7 @@ const AppLayout = (props: Props) => {
                             <IconButton>
                                 <NotificationsIcon />
                             </IconButton>
-                            <IconButton>
+                            <IconButton onClick={() => navigate('/writing')}>
                                 <EditIcon />
                             </IconButton>
                             <IconButton>

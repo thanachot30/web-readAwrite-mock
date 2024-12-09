@@ -1,176 +1,233 @@
-import React from 'react'
+import React, { useRef } from 'react';
+import { Box, Typography, IconButton, ImageList, ImageListItem } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import InfoImageGrid from './infoImageGrid';
 
-import { Box, Typography, Card, CardMedia, CardContent, IconButton, Container } from '@mui/material';
-import Grid from '@mui/material/Grid2';
-
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-type Props = {}
+type Props = {};
 const gridData = [
     {
-        image: 'https://via.placeholder.com/150', // Replace with actual image URL
+        image: 'https://via.placeholder.com/150',
         title: 'ทะลุมิติไปเป็นนางร้ายเมียพระเอก',
-        subtitle: 'นางร้ายที่รัก17',
-        views: '24',
-        likes: '178K',
-        favorites: '701',
+        writer: 'Ammara Writes',
+        status: {
+            love: '252',
+            see: '57K',
+            keep: '12',
+        },
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'เมื่อฉันต้องเลี้ยงนางร้าย (มี E-book)',
-        subtitle: 'อาทิตย์ชมดาว',
-        views: '16',
-        likes: '132K',
-        favorites: '732',
+        writer: 'Sukanya Novels',
+        status: {
+            love: '185',
+            see: '45K',
+            keep: '8',
+        },
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'ยอมหย่าให้แล้วนะคุณสามี',
-        subtitle: 'ธีรันจันทรา',
-        views: '11',
-        likes: '28K',
-        favorites: '136',
+        writer: 'Narisa Tales',
+        status: {
+            love: '300',
+            see: '60K',
+            keep: '15',
+        },
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'คู่หมั้นที่เขาไม่รัก',
-        subtitle: 'คนหลังเขา',
-        views: '11',
-        likes: '60K',
-        favorites: '546',
+        writer: 'Pimdao Fiction',
+        status: {
+            love: '400',
+            see: '72K',
+            keep: '20',
+        },
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'แค่สามีไม่รัก',
-        subtitle: 'อาธิชา',
-        views: '14',
-        likes: '54K',
-        favorites: '307',
+        writer: 'Tanya Writes',
+        status: {
+            love: '210',
+            see: '50K',
+            keep: '10',
+        },
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'ย้อนเวลามาเซ็นใบหย่า',
-        subtitle: 'LEOI',
-        views: '6',
-        likes: '22K',
-        favorites: '277',
+        writer: 'Kamol Fiction',
+        status: {
+            love: '320',
+            see: '65K',
+            keep: '18',
+        },
     },
     {
         image: 'https://via.placeholder.com/150',
-        title: 'เมียลับคุณหมอเจษ',
-        subtitle: 'หมอเจษ10',
-        views: '19',
-        likes: '90K',
-        favorites: '880',
+        title: 'เพิ่มอีกหนึ่ง',
+        writer: 'Chalita Tales',
+        status: {
+            love: '100',
+            see: '25K',
+            keep: '5',
+        },
     },
     {
         image: 'https://via.placeholder.com/150',
-        title: 'กลลวงร้ายเดิมพันรัก',
-        subtitle: 'นลินธารา',
-        views: '22',
-        likes: '120K',
-        favorites: '600',
+        title: 'คู่หมั้นที่เขาไม่รัก',
+        writer: 'Pimdao Fiction',
+        status: {
+            love: '410',
+            see: '70K',
+            keep: '22',
+        },
     },
     {
         image: 'https://via.placeholder.com/150',
-        title: 'แม่มาว่าไม่รัก (มีอีบุ๊ก)',
-        subtitle: 'ขุนแผน',
-        views: '8',
-        likes: '75K',
-        favorites: '400',
+        title: 'แค่สามีไม่รัก',
+        writer: 'Tanya Writes',
+        status: {
+            love: '250',
+            see: '55K',
+            keep: '14',
+        },
     },
     {
         image: 'https://via.placeholder.com/150',
-        title: 'รักข้ามภพ',
-        subtitle: 'เทพรักนิรันดร์',
-        views: '12',
-        likes: '48K',
-        favorites: '250',
+        title: 'ย้อนเวลามาเซ็นใบหย่า',
+        writer: 'Kamol Fiction',
+        status: {
+            love: '350',
+            see: '68K',
+            keep: '16',
+        },
     },
     {
         image: 'https://via.placeholder.com/150',
-        title: 'สะดุดรักนักธุรกิจหนุ่ม',
-        subtitle: 'มธุรสวาจา',
-        views: '14',
-        likes: '67K',
-        favorites: '300',
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'พายุรักซ่อนเงา',
-        subtitle: 'สายลมหวาน',
-        views: '20',
-        likes: '110K',
-        favorites: '580',
+        title: 'เพิ่มอีกหนึ่ง',
+        writer: 'Chalita Tales',
+        status: {
+            love: '120',
+            see: '28K',
+            keep: '7',
+        },
     },
 ];
 
 
 
+const iconSize = 8
+
 const ImageGrid = (props: Props) => {
+    const scrollContainerRef = useRef<HTMLUListElement | null>(null);
+
+    const scroll = (direction: 'left' | 'right') => {
+        if (scrollContainerRef.current) {
+            const scrollAmount = direction === 'left' ? -300 : 300; // Adjust scroll amount
+            scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    };
+
     return (
-        <Box>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            {/* <Box sx={{ ml: 6 }}>
+                <Typography variant="h5" gutterBottom >
+                    Love Novel
+                </Typography>
+                <Typography variant="h6" gutterBottom sx={{ m: 0 }}>
+                    นิยายรัก
+                </Typography>
+            </Box> */}
+            {/* Header Section */}
 
-            {/* Grid Section */}
-            <Grid container spacing={3}>
-                {gridData.map((item, index) => (
-                    <Grid item xs={12} sm={6} md={4} lg={2} key={index}>
-                        <Card sx={{ boxShadow: 0, textAlign: 'center' }}>
-                            {/* Image Section */}
-                            <Box
-                                component="img"
-                                src={item.image}
-                                alt={item.title}
-                                sx={{
-                                    width: 45,
-                                    height: 45,
-                                    borderRadius: '8px',
-                                    mr: 2, // Margin to the right of the image
-                                }}
-                            />
 
-                            {/* Content */}
-                            <CardContent>
-                                <Typography
-                                    variant="subtitle1"
-                                    sx={{
-                                        fontWeight: 'bold',
-                                        fontSize: '0.5rem',
-                                        mb: 0.5,
-                                        lineHeight: 1.2,
+            {/* Scrollable Section with Buttons */}
+            <Box sx={{ display: 'flex', alignItems: 'center', position: 'relative', width: '100%', border: 0, m: 0, p: 0 }}>
+
+                {/* Left Scroll Button */}
+                <IconButton
+                    onClick={() => scroll('left')}
+                    sx={{
+                        position: 'absolute',
+                        left: 0,
+                        ml: 5,
+                        zIndex: 1,
+                        background: '#fff',
+                        boxShadow: 3,
+                        '&:hover': { background: '#eee' },
+                    }}
+                >
+                    <ArrowBackIosIcon sx={{
+                        fontSize: '8px', // Set the icon size explicitly
+                    }} />
+                </IconButton>
+
+                {/* Image List */}
+                <ImageList
+                    ref={scrollContainerRef}
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        overflowX: 'auto',
+                        scrollBehavior: 'smooth',
+                        // gap: 2,
+                        mt: 0,
+                        // padding: 2,
+                        mx: 5, // Space for scroll buttons
+                    }}
+                    cols={5} // Show up to 6 images at a time
+                //rowHeight={150} // Row height for consistent layout
+                >
+                    {gridData.map((item, index) => (
+                        <Box sx={{ display: 'flex', flexDirection: 'column', mx: 1 }}>
+                            <ImageListItem key={index} sx={{
+                                flex: '0 0 auto', // Prevent shrinking
+                                width: 120, // Set width
+                                height: 120, // Set height
+                                overflow: 'hidden', // Ensure content doesn't overflow
+                                borderRadius: 2, // Optional: Rounded corners
+                            }}>
+                                <img
+                                    src={item.image}
+                                    alt={item.title}
+                                    loading="lazy"
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                        borderRadius: `${iconSize}px`,
                                     }}
-                                >
-                                    {item.title}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    sx={{ fontSize: '0.8rem', mb: 1 }}
-                                >
-                                    {item.subtitle}
-                                </Typography>
-                                {/* Stats */}
-                                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                                        <VisibilityIcon fontSize="small" />
-                                        <Typography variant="caption">{item.views}</Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                                        <FavoriteBorderIcon fontSize="small" />
-                                        <Typography variant="caption">{item.likes}</Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                                        <FavoriteBorderIcon fontSize="small" />
-                                        <Typography variant="caption">{item.favorites}</Typography>
-                                    </Box>
-                                </Box>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid>
+                                />
+
+                            </ImageListItem>
+                            <InfoImageGrid status={item.status} title={item.title} writer={item.writer} />
+                        </Box>
+
+
+                    ))}
+                </ImageList>
+
+                {/* Right Scroll Button */}
+                <IconButton
+                    onClick={() => scroll('right')}
+                    sx={{
+                        position: 'absolute',
+                        right: 0,
+                        zIndex: 1,
+                        background: '#fff',
+                        boxShadow: 3,
+                        '&:hover': { background: '#eee' },
+                    }}
+                >
+                    <ArrowForwardIosIcon sx={{ fontSize: '8px' }} />
+                </IconButton>
+            </Box>
         </Box>
     );
-}
+};
 
-export default ImageGrid
+export default ImageGrid;
