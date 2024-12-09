@@ -2,7 +2,8 @@ import React, { useRef } from 'react';
 import { Box, Typography, IconButton, ImageList, ImageListItem } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import InfoImageGrid from './infoImageGrid';
+import { Link } from 'react-router-dom';
+import InfoImageGrid from './InfoImageGrid';
 
 type Props = {};
 const gridData = [
@@ -134,20 +135,24 @@ const ImageGrid = (props: Props) => {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            {/* <Box sx={{ ml: 6 }}>
-                <Typography variant="h5" gutterBottom >
-                    Love Novel
-                </Typography>
-                <Typography variant="h6" gutterBottom sx={{ m: 0 }}>
+
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mx: 6 }}>
+                <Typography>
                     นิยายรัก
                 </Typography>
-            </Box> */}
-            {/* Header Section */}
 
-
+                <Typography
+                    component={Link} // Use Link for navigation
+                    to="/reading" // Navigate to '/'
+                    sx={{
+                        fontSize: '12px', fontWeight: 'bold', color: '#21c3bb', textDecoration: 'none', // Remove underline for the link
+                        cursor: 'pointer',
+                    }}>
+                    ดูทั้งหมด
+                </Typography>
+            </Box>
             {/* Scrollable Section with Buttons */}
             <Box sx={{ display: 'flex', alignItems: 'center', position: 'relative', width: '100%', border: 0, m: 0, p: 0 }}>
-
                 {/* Left Scroll Button */}
                 <IconButton
                     onClick={() => scroll('left')}

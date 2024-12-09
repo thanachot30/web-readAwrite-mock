@@ -24,9 +24,6 @@ const Home = (props: Props) => {
                     <Typography variant="h5" gutterBottom >
                         Love Novel
                     </Typography>
-                    <Typography variant="h6" gutterBottom sx={{ m: 0 }}>
-                        นิยายรัก
-                    </Typography>
                 </Box>
                 <ImageGrid />
                 <ImageGrid />

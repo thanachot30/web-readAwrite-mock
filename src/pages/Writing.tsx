@@ -12,6 +12,8 @@ import {
     Avatar,
     Divider,
     Icon,
+    Tabs,
+    Tab,
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -22,6 +24,11 @@ import { LiaPenNibSolid } from "react-icons/lia";
 import { MdEditNote } from "react-icons/md";
 import { MdManageSearch } from "react-icons/md";
 const WritingPage = () => {
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
     return (
         <Container maxWidth="md" sx={{ py: 3 }}>
             {/* Header Section */}
@@ -33,7 +40,7 @@ const WritingPage = () => {
             </Box>
 
             {/* Navigation Tabs */}
-            <Box sx={{ display: 'flex', gap: 1, }}>
+            {/* <Box sx={{ display: 'flex', gap: 1, }}>
                 <Button variant="text" sx={{ textTransform: 'none', fontWeight: 'bold', borderBottom: '2px solid #00C8FF' }}>
                     งานเขียน
                 </Button>
@@ -49,9 +56,59 @@ const WritingPage = () => {
                 <Button variant="text" sx={{ textTransform: 'none', color: 'GrayText' }}>
                     My Pre-order
                 </Button>
-
+            </Box> */}
+            <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 4 }}>
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    variant="scrollable"
+                    scrollButtons="auto"
+                    textColor="primary"
+                    indicatorColor="primary"
+                >
+                    <Tab
+                        label="งานเขียน"
+                        sx={{
+                            textTransform: 'none',
+                            fontWeight: value === 0 ? 'bold' : 'normal',
+                            //borderBottom: value === 0 ? '2px solid #00C8FF' : 'none',
+                        }}
+                    />
+                    <Tab
+                        label="สถิติ"
+                        sx={{
+                            textTransform: 'none',
+                            color: value === 1 ? 'text.primary' : 'GrayText',
+                        }}
+                        disabled={true}
+                    />
+                    <Tab
+                        label="รายงาน"
+                        sx={{
+                            textTransform: 'none',
+                            color: value === 2 ? 'text.primary' : 'GrayText',
+                        }}
+                        disabled={true}
+                    />
+                    <Tab
+                        label="การจ่ายเงิน"
+                        sx={{
+                            textTransform: 'none',
+                            color: value === 3 ? 'text.primary' : 'GrayText',
+                        }}
+                        disabled={true}
+                    />
+                    <Tab
+                        label="My Pre-order"
+                        sx={{
+                            textTransform: 'none',
+                            color: value === 4 ? 'text.primary' : 'GrayText',
+                        }}
+                        disabled={true}
+                    />
+                </Tabs>
             </Box>
-            <Divider sx={{ mb: 4 }} />
+            {/* <Divider sx={{ mb: 4 }} /> */}
             {/* Action Buttons */}
             <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
                 <Button variant="outlined" startIcon={<MdEditNote />}
