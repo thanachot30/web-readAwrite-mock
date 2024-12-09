@@ -78,9 +78,9 @@ const Reading = () => {
                 />
             </Stack>
 
-            <Box>
-                <ImageGridReading />
-            </Box>
+
+            <ImageGridReading />
+
         </Container>
     );
 };

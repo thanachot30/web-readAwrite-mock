@@ -10,9 +10,9 @@ const AppLayout = () => {
     const navigate = useNavigate();
     return (
         <Box>
-            <AppBar position="static" color="default" elevation={0} sx={{ borderBottom: '1px solid #e0e0e0' }}>
+            <AppBar position="fixed" color="default" elevation={0} sx={{ borderBottom: '1px solid #e0e0e0' }}>
                 <Container maxWidth="md"> {/* Container to control width */}
-                    <Toolbar sx={{ justifyContent: 'space-between', p: 0 }}>
+                    <Toolbar sx={{ justifyContent: 'space-between', }}>
                         {/* Left Section */}
                         <Box sx={{ display: 'flex', gap: 2 }}>
                             <Typography variant="h6" color="textPrimary" sx={{ cursor: 'pointer' }}>
@@ -59,7 +59,7 @@ const AppLayout = () => {
                 </Container>
             </AppBar>
 
-            <Box component="main" >
+            <Box component="main" sx={{ pt: 6 }}>
                 <Outlet />
             </Box>
         </Box>

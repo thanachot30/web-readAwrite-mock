@@ -4,12 +4,16 @@ import {
     Typography,
     Container,
     Button,
-    Paper,
     MenuItem,
     Select,
     Avatar,
     Tabs,
     Tab,
+    ListItem,
+    List,
+    Checkbox,
+    ListItemAvatar,
+    ListItemText,
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -24,6 +28,44 @@ const WritingPage = () => {
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
+
+    const mockData = [
+        {
+            id: 1,
+            image: 'https://via.placeholder.com/150',
+            title: 'web',
+            description: 'บรรยาย (ออริจินอล) | web999',
+            stats: { list: 0, views: 1, loves: 0 },
+        },
+        {
+            id: 2,
+            image: 'https://via.placeholder.com/150',
+            title: 'story2',
+            description: 'บรรยาย (ออริจินอล) | author2',
+            stats: { list: 5, views: 15, loves: 7 },
+        },
+        {
+            id: 3,
+            image: 'https://via.placeholder.com/150',
+            title: 'story3',
+            description: 'บรรยาย (ออริจินอล) | author3',
+            stats: { list: 2, views: 12, loves: 4 },
+        },
+        {
+            id: 4,
+            image: 'https://via.placeholder.com/150',
+            title: 'story4',
+            description: 'บรรยาย (ออริจินอล) | author4',
+            stats: { list: 3, views: 10, loves: 6 },
+        },
+        {
+            id: 5,
+            image: 'https://via.placeholder.com/150',
+            title: 'story5',
+            description: 'บรรยาย (ออริจินอล) | author5',
+            stats: { list: 1, views: 5, loves: 2 },
+        },
+    ];
     return (
         <Container maxWidth="md" sx={{ py: 3 }}>
             {/* Header Section */}
@@ -33,25 +75,6 @@ const WritingPage = () => {
                     <KeyboardArrowDownIcon fontSize="small" />
                 </Typography>
             </Box>
-
-            {/* Navigation Tabs */}
-            {/* <Box sx={{ display: 'flex', gap: 1, }}>
-                <Button variant="text" sx={{ textTransform: 'none', fontWeight: 'bold', borderBottom: '2px solid #00C8FF' }}>
-                    งานเขียน
-                </Button>
-                <Button variant="text" sx={{ textTransform: 'none', color: 'GrayText' }}>
-                    สถิติ
-                </Button>
-                <Button variant="text" sx={{ textTransform: 'none', color: 'GrayText' }}>
-                    รายงาน
-                </Button>
-                <Button variant="text" sx={{ textTransform: 'none', color: 'GrayText' }}>
-                    การจ่ายเงิน
-                </Button>
-                <Button variant="text" sx={{ textTransform: 'none', color: 'GrayText' }}>
-                    My Pre-order
-                </Button>
-            </Box> */}
             <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 4 }}>
                 <Tabs
                     value={value}
@@ -145,8 +168,64 @@ const WritingPage = () => {
                     เพิ่มงานเขียน
                 </Button>
             </Box>
+            <List>
+                {mockData.map((item) => (
+                    <ListItem
+                        key={item.id}
+                        sx={{
+                            p: 2,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 2,
+                            borderBottom: '1px solid #e0e0e0',
+                        }}
+                        disableGutters
+                    >
+                        {/* Checkbox */}
+                        <Checkbox />
 
-            {/* Writing List */}
+                        {/* Avatar */}
+                        <ListItemAvatar>
+                            <Avatar
+                                src={item.image}
+                                alt={item.title}
+                                sx={{ width: 56, height: 56, borderRadius: 1 }}
+                            />
+                        </ListItemAvatar>
+
+                        {/* Title and Description */}
+                        <ListItemText
+                            primary={
+                                <Typography variant="subtitle1" fontWeight="bold">
+                                    {item.title}
+                                </Typography>
+                            }
+                            secondary={
+                                <Typography variant="caption" color="GrayText">
+                                    {item.description}
+                                </Typography>
+                            }
+                        />
+
+                        {/* Stats */}
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                                <ListIcon fontSize="small" />
+                                <Typography variant="caption">{item.stats.list}</Typography>
+                            </Box>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                                <VisibilityIcon fontSize="small" />
+                                <Typography variant="caption">{item.stats.views}</Typography>
+                            </Box>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                                <FavoriteBorderIcon fontSize="small" />
+                                <Typography variant="caption">{item.stats.loves}</Typography>
+                            </Box>
+                        </Box>
+                    </ListItem>
+                ))}
+            </List>
+            {/* Writing List
             <Paper sx={{ p: 2, display: 'flex', alignItems: 'center', gap: 2 }}>
                 <Avatar
                     src="https://via.placeholder.com/150"
@@ -175,7 +254,7 @@ const WritingPage = () => {
                         <Typography variant="caption">0</Typography>
                     </Box>
                 </Box>
-            </Paper>
+            </Paper> */}
         </Container>
     );
 };

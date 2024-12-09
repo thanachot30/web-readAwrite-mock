@@ -1,4 +1,5 @@
 import { Box, Typography, ImageList, ImageListItem, Chip } from '@mui/material';
+import StatusIcon from './StatusIcon';
 
 
 const mockData = [
@@ -6,84 +7,84 @@ const mockData = [
         image: 'https://via.placeholder.com/150',
         title: 'ย้อนเวลามาเซ็นใบหย่า',
         author: 'LEOI',
-        stats: { keep: '9', views: '84K', love: '785' },
+        status: { keep: '9', views: '84K', love: '785' },
         tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'คู่หมั้นที่เขาไม่รัก',
         author: 'คนหลังเขา',
-        stats: { keep: '13', views: '112K', love: '769' },
+        status: { keep: '13', views: '112K', love: '769' },
         tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'ย้อนเวลามาเซ็นใบหย่า',
         author: 'LEOI',
-        stats: { keep: '9', views: '84K', love: '785' },
+        status: { keep: '9', views: '84K', love: '785' },
         tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'คู่หมั้นที่เขาไม่รัก',
         author: 'คนหลังเขา',
-        stats: { keep: '13', views: '112K', love: '769' },
+        status: { keep: '13', views: '112K', love: '769' },
         tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'ย้อนเวลามาเซ็นใบหย่า',
         author: 'LEOI',
-        stats: { keep: '9', views: '84K', love: '785' },
+        status: { keep: '9', views: '84K', love: '785' },
         tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'คู่หมั้นที่เขาไม่รัก',
         author: 'คนหลังเขา',
-        stats: { keep: '13', views: '112K', love: '769' },
+        status: { keep: '13', views: '112K', love: '769' },
         tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'ย้อนเวลามาเซ็นใบหย่า',
         author: 'LEOI',
-        stats: { keep: '9', views: '84K', love: '785' },
+        status: { keep: '9', views: '84K', love: '785' },
         tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'คู่หมั้นที่เขาไม่รัก',
         author: 'คนหลังเขา',
-        stats: { keep: '13', views: '112K', love: '769' },
+        status: { keep: '13', views: '112K', love: '769' },
         tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'ย้อนเวลามาเซ็นใบหย่า',
         author: 'LEOI',
-        stats: { keep: '9', views: '84K', love: '785' },
+        status: { keep: '9', views: '84K', love: '785' },
         tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'คู่หมั้นที่เขาไม่รัก',
         author: 'คนหลังเขา',
-        stats: { keep: '13', views: '112K', love: '769' },
+        status: { keep: '13', views: '112K', love: '769' },
         tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'ย้อนเวลามาเซ็นใบหย่า',
         author: 'LEOI',
-        stats: { keep: '9', views: '84K', love: '785' },
+        status: { keep: '9', views: '84K', love: '785' },
         tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
     },
     {
         image: 'https://via.placeholder.com/150',
         title: 'คู่หมั้นที่เขาไม่รัก',
         author: 'คนหลังเขา',
-        stats: { keep: '13', views: '112K', love: '769' },
+        status: { keep: '13', views: '112K', love: '769' },
         tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
     },
     // Add more items as needed
@@ -100,7 +101,7 @@ const ImageGridReading = () => {
             </Box>
 
             {/* Image List Content */}
-            <ImageList cols={2} gap={16}> {/* Single-column layout for flex row */}
+            <ImageList cols={2} sx={{ justifyContent: 'space-around' }}> {/* Single-column layout for flex row */}
                 {mockData.map((item, index) => (
                     <ImageListItem
                         key={index}
@@ -108,70 +109,87 @@ const ImageGridReading = () => {
                             display: 'flex',
                             flexDirection: 'row',
                             alignItems: 'flex-start',
-                            gap: 2,
-                            borderRadius: 1,
-                            overflow: 'hidden',
                             padding: 1,
-                            border: '1px solid #e0e0e0', // Optional border for clarity
+                            //border: '1px solid #e0e0e0', // Optional border for clarity
                         }}
                     >
-                        {/* Image Section */}
-                        <img
-                            src={item.image}
-                            alt={item.title}
-                            style={{
+
+                        <Box
+                            sx={{
+                                flexShrink: 0, // Prevent the image from shrinking
                                 width: '120px',
                                 height: '120px',
-                                objectFit: 'cover',
-                                borderRadius: '8px',
+                                overflow: 'hidden',
+                                borderRadius: 1,
                             }}
-                        />
+                        >
+                            <img
+                                src={item.image}
+                                alt={item.title}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    borderRadius: '8px',
+                                }}
+                            />
+                        </Box>
 
                         {/* Text Content Section */}
-                        <Box sx={{ flex: 1 }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, ml: 1 }}>
                             {/* Title and Author */}
-                            <Typography
+                            <Box sx={{ justifyContent: 'flex-start', pt: 1 }}>
+                                <Typography
+                                    sx={{
+                                        fontSize: '12px',
+                                        fontWeight: 'bold',
+                                        mb: 0.5,
+                                    }}
+                                >
+                                    {item.title}
+                                </Typography>
+                            </Box>
+                            <Box
                                 sx={{
-                                    fontSize: '1rem',
-                                    fontWeight: 'bold',
-                                    mb: 0.5,
-                                }}
-                            >
-                                {item.title}
-                            </Typography>
-                            <Typography
-                                sx={{
-                                    fontSize: '0.85rem',
-                                    color: 'text.secondary',
-                                    mb: 1,
-                                }}
-                            >
-                                {item.author}
-                            </Typography>
+                                    // flex: '0 1 auto',
+                                    display: 'flex',
+                                    justifyContent: 'end',
+                                    flexDirection: 'column',
 
-                            {/* Stats Section */}
-                            <Box sx={{ display: 'flex', gap: 2, mb: 1 }}>
-                                <Typography sx={{ fontSize: '0.85rem' }}>{item.stats.keep} Keep</Typography>
-                                <Typography sx={{ fontSize: '0.85rem' }}>{item.stats.views} Views</Typography>
-                                <Typography sx={{ fontSize: '0.85rem' }}>{item.stats.love} Loves</Typography>
+                                }}>
+                                <Typography
+                                    sx={{
+                                        fontSize: '12px',
+                                        color: 'text.secondary',
+                                    }}
+                                >
+                                    {item.author}
+                                </Typography>
+
+                                <StatusIcon
+                                    keep={item.status.keep}
+                                    see={item.status.views}
+                                    love={item.status.love}
+                                />
+
+                                {/* Tags Section */}
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                    {item.tags.map((tag, i) => (
+                                        <Chip
+                                            key={i}
+                                            label={tag}
+                                            size="small"
+                                            sx={{ fontSize: '0.75rem' }}
+                                        />
+                                    ))}
+                                </Box>
                             </Box>
 
-                            {/* Tags Section */}
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                {item.tags.map((tag, i) => (
-                                    <Chip
-                                        key={i}
-                                        label={tag}
-                                        size="small"
-                                        sx={{ fontSize: '0.75rem' }}
-                                    />
-                                ))}
-                            </Box>
                         </Box>
                     </ImageListItem>
                 ))}
             </ImageList>
-        </Box>
+        </Box >
     );
 };
 
