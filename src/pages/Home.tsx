@@ -13,12 +13,6 @@ const Home = () => {
             <Divider />
 
             <Container maxWidth="md"
-            // sx={{
-            //     display: 'flex',
-            //     flexDirection: 'column',
-            //     alignItems: 'center',
-            //     textAlign: 'center', // Center text content if applicable
-            // }}
             >
                 <Box sx={{ ml: 6 }}>
                     <Typography variant="h5" gutterBottom >

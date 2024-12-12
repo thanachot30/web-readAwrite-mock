@@ -22,6 +22,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { LiaPenNibSolid } from "react-icons/lia";
 import { MdEditNote } from "react-icons/md";
 import { MdManageSearch } from "react-icons/md";
+import StatusIcon from '../component/StatusIcon';
 const WritingPage = () => {
     const [value, setValue] = React.useState(0);
 
@@ -156,15 +157,43 @@ const WritingPage = () => {
             <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
                 จัดการงานเขียน
             </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Select defaultValue="จัดการ" size="small" sx={{ minWidth: 120 }}>
-                        <MenuItem value="จัดการ">จัดการ</MenuItem>
-                        <MenuItem value="Edit">แก้ไข</MenuItem>
-                        <MenuItem value="Delete">ลบ</MenuItem>
+                    <Box sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: '1px solid #e0e0e0', // กรอบสีเทา
+                        borderRadius: '4px', // มุมโค้ง
+                        height: '29px', // กำหนดความสูงให้เท่ากัน
+                        width: 'auto', // ความกว้างแบบคงท
+                    }}>
+                        <Checkbox size='small' />
+                    </Box>
+
+                    <Select defaultValue="จัดการ" size="small" sx={{
+                        minWidth: 100, // กำหนดความกว้าง
+
+                        height: '30px', // ความสูงเท่ากับ Checkbox
+                        fontSize: '14px',
+                    }}>
+                        <MenuItem value="จัดการ" sx={{ fontSize: '14px', }}>จัดการ</MenuItem>
+                        {/* <MenuItem value="Edit">แก้ไข</MenuItem>
+                        <MenuItem value="Delete">ลบ</MenuItem> */}
                     </Select>
                 </Box>
-                <Button variant="contained" sx={{ textTransform: 'none', backgroundColor: '#00C8FF', '&:hover': { backgroundColor: '#00B2E3' } }}>
+                <Button variant="contained" sx={{
+                    fontSize: '13px',
+                    width: 170,
+                    textTransform: 'none', // Prevent uppercase transformation
+                    backgroundColor: '#4DD0E1', // Teal background color
+                    color: '#FFFFFF', // White text color
+                    borderRadius: '24px', // Fully rounded corners
+                    padding: '8px 24px', // Padding for a balanced look
+                    '&:hover': {
+                        backgroundColor: '#26C6DA', // Darker teal on hover
+                    },
+                }}>
                     เพิ่มงานเขียน
                 </Button>
             </Box>
@@ -173,11 +202,13 @@ const WritingPage = () => {
                     <ListItem
                         key={item.id}
                         sx={{
-                            p: 2,
+                            p: 1,
+                            mb: 1,
                             display: 'flex',
                             alignItems: 'center',
                             gap: 2,
-                            borderBottom: '1px solid #e0e0e0',
+                            border: '1px solid #e0e0e0',
+                            borderRadius: '8px',
                         }}
                         disableGutters
                     >
@@ -201,60 +232,95 @@ const WritingPage = () => {
                                 </Typography>
                             }
                             secondary={
-                                <Typography variant="caption" color="GrayText">
-                                    {item.description}
-                                </Typography>
+                                <Box>
+                                    <Typography variant="caption" color="GrayText">
+                                        {item.description}
+                                    </Typography>
+                                    <StatusIcon
+                                        keep={item.stats.list.toString()}
+                                        see={item.stats.views.toString()}
+                                        love={item.stats.loves.toString()}
+                                    />
+                                </Box>
                             }
                         />
+                        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: "flex-end" }}>
 
-                        {/* Stats */}
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                            <Typography variant="caption" color="GrayText" sx={{ display: 'flex', justifyContent: 'end' }}>
+                                {"edit 08-12-2567 21:24"}
+                            </Typography>
+
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                                <ListIcon fontSize="small" />
-                                <Typography variant="caption">{item.stats.list}</Typography>
-                            </Box>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                                <VisibilityIcon fontSize="small" />
-                                <Typography variant="caption">{item.stats.views}</Typography>
-                            </Box>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                                <FavoriteBorderIcon fontSize="small" />
-                                <Typography variant="caption">{item.stats.loves}</Typography>
+                                <Button
+                                    variant="outlined"
+                                    size='small'
+                                    startIcon={<VisibilityIcon />}
+                                    sx={{
+                                        height: '30px',
+                                        textTransform: 'none', // Prevent uppercase text
+                                        borderColor: '#e0e0e0',
+                                        fontSize: '10px',
+                                        color: 'black',
+                                        '&:hover': { borderColor: '#ccc' },
+                                        borderRadius: '8px', // Rounded edges
+                                    }}
+                                >
+                                    <Typography sx={{ fontSize: "10px", }}>หน้าอ่าน</Typography>
+
+                                </Button>
+                                <Select
+                                    // size='small'
+                                    defaultValue="เผยแพร่"
+                                    sx={{
+
+                                        height: '30px',
+                                        minWidth: 120,
+                                        borderColor: '#e0e0e0',
+                                        borderRadius: '8px',
+                                        '& .MuiSelect-select': {
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 1,
+                                        },
+                                        '& .MuiOutlinedInput-notchedOutline': {
+                                            borderColor: '#e0e0e0',
+                                        },
+                                    }}
+                                >
+                                    {/* Dropdown Item */}
+                                    <MenuItem value="เผยแพร่">
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <Box
+                                                sx={{
+                                                    width: 8,
+                                                    height: 8,
+                                                    backgroundColor: '#4DD0E1', // Teal dot
+                                                    borderRadius: '50%',
+                                                }}
+                                            />
+                                            <Typography sx={{ fontSize: "10px", }}>เผยแพร่</Typography>
+                                        </Box>
+                                    </MenuItem>
+                                    <MenuItem value="Draft">
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <Box
+                                                sx={{
+                                                    width: 8,
+                                                    height: 8,
+                                                    backgroundColor: 'gray', // Gray dot
+                                                    borderRadius: '50%',
+                                                }}
+                                            />
+                                            <Typography sx={{ fontSize: "10px", }}>Draft</Typography>
+                                        </Box>
+                                    </MenuItem>
+                                </Select>
                             </Box>
                         </Box>
                     </ListItem>
                 ))}
             </List>
-            {/* Writing List
-            <Paper sx={{ p: 2, display: 'flex', alignItems: 'center', gap: 2 }}>
-                <Avatar
-                    src="https://via.placeholder.com/150"
-                    alt="writing"
-                    sx={{ width: 56, height: 56, borderRadius: 1 }}
-                />
-                <Box sx={{ flex: 1 }}>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                        web
-                    </Typography>
-                    <Typography variant="caption" color="GrayText">
-                        บรรยาย (ออริจินอล) | web999
-                    </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                        <ListIcon fontSize="small" />
-                        <Typography variant="caption">0</Typography>
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                        <VisibilityIcon fontSize="small" />
-                        <Typography variant="caption">1</Typography>
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                        <FavoriteBorderIcon fontSize="small" />
-                        <Typography variant="caption">0</Typography>
-                    </Box>
-                </Box>
-            </Paper> */}
+
         </Container>
     );
 };
