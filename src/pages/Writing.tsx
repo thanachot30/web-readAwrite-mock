@@ -17,8 +17,6 @@ import {
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import ListIcon from '@mui/icons-material/List';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { LiaPenNibSolid } from "react-icons/lia";
 import { MdEditNote } from "react-icons/md";
 import { MdManageSearch } from "react-icons/md";
