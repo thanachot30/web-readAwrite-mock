@@ -77,8 +77,6 @@ const Reading = () => {
                     variant="outlined"
                 />
             </Stack>
-
-
             <ImageGridReading />
 
         </Container>

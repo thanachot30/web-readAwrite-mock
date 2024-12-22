@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     Box,
     Typography,
@@ -21,7 +21,12 @@ import { LiaPenNibSolid } from "react-icons/lia";
 import { MdEditNote } from "react-icons/md";
 import { MdManageSearch } from "react-icons/md";
 import StatusIcon from '../component/StatusIcon';
+import { ModalContext } from '../modal/ModalEnd';
+import ListFixedW from '../component/ListFixedW';
+import ListWLogic from '../component/ListWLogic';
+
 const WritingPage = () => {
+
     const [value, setValue] = React.useState(0);
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -166,12 +171,11 @@ const WritingPage = () => {
                         height: '29px', // กำหนดความสูงให้เท่ากัน
                         width: 'auto', // ความกว้างแบบคงท
                     }}>
-                        <Checkbox size='small' />
+                        <Checkbox size='small' disabled />
                     </Box>
 
                     <Select defaultValue="จัดการ" size="small" sx={{
                         minWidth: 100, // กำหนดความกว้าง
-
                         height: '30px', // ความสูงเท่ากับ Checkbox
                         fontSize: '14px',
                     }}>
@@ -180,6 +184,7 @@ const WritingPage = () => {
                         <MenuItem value="Delete">ลบ</MenuItem> */}
                     </Select>
                 </Box>
+
                 <Button variant="contained" sx={{
                     fontSize: '13px',
                     width: 170,
@@ -195,129 +200,11 @@ const WritingPage = () => {
                     เพิ่มงานเขียน
                 </Button>
             </Box>
-            <List>
-                {mockData.map((item) => (
-                    <ListItem
-                        key={item.id}
-                        sx={{
-                            p: 1,
-                            mb: 1,
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 2,
-                            border: '1px solid #e0e0e0',
-                            borderRadius: '8px',
-                        }}
-                        disableGutters
-                    >
-                        {/* Checkbox */}
-                        <Checkbox />
+            <Box>
+                <ListWLogic />
+                <ListFixedW />
+            </Box>
 
-                        {/* Avatar */}
-                        <ListItemAvatar>
-                            <Avatar
-                                src={item.image}
-                                alt={item.title}
-                                sx={{ width: 56, height: 56, borderRadius: 1 }}
-                            />
-                        </ListItemAvatar>
-
-                        {/* Title and Description */}
-                        <ListItemText
-                            primary={
-                                <Typography variant="subtitle1" fontWeight="bold">
-                                    {item.title}
-                                </Typography>
-                            }
-                            secondary={
-                                <Box>
-                                    <Typography variant="caption" color="GrayText">
-                                        {item.description}
-                                    </Typography>
-                                    <StatusIcon
-                                        keep={item.stats.list.toString()}
-                                        see={item.stats.views.toString()}
-                                        love={item.stats.loves.toString()}
-                                    />
-                                </Box>
-                            }
-                        />
-                        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: "flex-end" }}>
-
-                            <Typography variant="caption" color="GrayText" sx={{ display: 'flex', justifyContent: 'end' }}>
-                                {"edit 08-12-2567 21:24"}
-                            </Typography>
-
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                                <Button
-                                    variant="outlined"
-                                    size='small'
-                                    startIcon={<VisibilityIcon />}
-                                    sx={{
-                                        height: '30px',
-                                        textTransform: 'none', // Prevent uppercase text
-                                        borderColor: '#e0e0e0',
-                                        fontSize: '10px',
-                                        color: 'black',
-                                        '&:hover': { borderColor: '#ccc' },
-                                        borderRadius: '8px', // Rounded edges
-                                    }}
-                                >
-                                    <Typography sx={{ fontSize: "10px", }}>หน้าอ่าน</Typography>
-
-                                </Button>
-                                <Select
-                                    // size='small'
-                                    defaultValue="เผยแพร่"
-                                    sx={{
-
-                                        height: '30px',
-                                        minWidth: 120,
-                                        borderColor: '#e0e0e0',
-                                        borderRadius: '8px',
-                                        '& .MuiSelect-select': {
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: 1,
-                                        },
-                                        '& .MuiOutlinedInput-notchedOutline': {
-                                            borderColor: '#e0e0e0',
-                                        },
-                                    }}
-                                >
-                                    {/* Dropdown Item */}
-                                    <MenuItem value="เผยแพร่">
-                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                            <Box
-                                                sx={{
-                                                    width: 8,
-                                                    height: 8,
-                                                    backgroundColor: '#4DD0E1', // Teal dot
-                                                    borderRadius: '50%',
-                                                }}
-                                            />
-                                            <Typography sx={{ fontSize: "10px", }}>เผยแพร่</Typography>
-                                        </Box>
-                                    </MenuItem>
-                                    <MenuItem value="Draft">
-                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                            <Box
-                                                sx={{
-                                                    width: 8,
-                                                    height: 8,
-                                                    backgroundColor: 'gray', // Gray dot
-                                                    borderRadius: '50%',
-                                                }}
-                                            />
-                                            <Typography sx={{ fontSize: "10px", }}>Draft</Typography>
-                                        </Box>
-                                    </MenuItem>
-                                </Select>
-                            </Box>
-                        </Box>
-                    </ListItem>
-                ))}
-            </List>
 
         </Container>
     );
