@@ -4,7 +4,7 @@ import { Box, Button, Modal, Typography } from '@mui/material';
 
 
 const GlobalModal = () => {
-    const { isOpen, closeModal } = useContext(ModalContext);
+    const { isOpen } = useContext(ModalContext);
     return (
         <Modal open={isOpen} >
             <Box

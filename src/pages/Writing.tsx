@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+
 import {
     Box,
     Typography,
@@ -6,70 +6,25 @@ import {
     Button,
     MenuItem,
     Select,
-    Avatar,
-    Tabs,
     Tab,
-    ListItem,
-    List,
     Checkbox,
-    ListItemAvatar,
-    ListItemText,
+    Tabs,
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { LiaPenNibSolid } from "react-icons/lia";
 import { MdEditNote } from "react-icons/md";
 import { MdManageSearch } from "react-icons/md";
-import StatusIcon from '../component/StatusIcon';
-import { ModalContext } from '../modal/ModalEnd';
 import ListFixedW from '../component/ListFixedW';
 import ListWLogic from '../component/ListWLogic';
+import { useState } from 'react';
 
 const WritingPage = () => {
 
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
-
-    const mockData = [
-        {
-            id: 1,
-            image: 'https://via.placeholder.com/150',
-            title: 'web',
-            description: 'บรรยาย (ออริจินอล) | web999',
-            stats: { list: 0, views: 1, loves: 0 },
-        },
-        {
-            id: 2,
-            image: 'https://via.placeholder.com/150',
-            title: 'story2',
-            description: 'บรรยาย (ออริจินอล) | author2',
-            stats: { list: 5, views: 15, loves: 7 },
-        },
-        {
-            id: 3,
-            image: 'https://via.placeholder.com/150',
-            title: 'story3',
-            description: 'บรรยาย (ออริจินอล) | author3',
-            stats: { list: 2, views: 12, loves: 4 },
-        },
-        {
-            id: 4,
-            image: 'https://via.placeholder.com/150',
-            title: 'story4',
-            description: 'บรรยาย (ออริจินอล) | author4',
-            stats: { list: 3, views: 10, loves: 6 },
-        },
-        {
-            id: 5,
-            image: 'https://via.placeholder.com/150',
-            title: 'story5',
-            description: 'บรรยาย (ออริจินอล) | author5',
-            stats: { list: 1, views: 5, loves: 2 },
-        },
-    ];
     return (
         <Container maxWidth="md" sx={{ py: 3 }}>
             {/* Header Section */}
