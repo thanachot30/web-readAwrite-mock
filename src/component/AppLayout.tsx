@@ -1,25 +1,24 @@
 
-import { AppBar, Toolbar, Typography, IconButton, Box, Container, MenuItem, Menu, Tabs, Tab } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton, Box, Container, Menu, Tabs, Tab } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import EditIcon from '@mui/icons-material/Edit';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import GlobalModal from '../modal/GlobalModal';
 import { useContext, useEffect, useState } from 'react';
 
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import { ModalContext } from '../modal/ModalEnd';
-
+import { FaRobot } from "react-icons/fa";
 const AppLayout = () => {
     // const notifications = [
     //     { id: 1, message: 'New comment on your post' },
     //     { id: 2, message: 'Your order has been shipped' },
     //     { id: 3, message: 'You have a new follower' },
     // ];
-    const { isNoti, openNoti, closeNoti } = useContext(ModalContext);
+    const { isNoti, openNoti, closeNoti, noti } = useContext(ModalContext);
     const [anchorEl, setAnchorEl] = useState<Element | null>(null); // State for the menu anchor
     const [tabValue, setTabValue] = useState(0);
     // const open = Boolean(anchorEl);
@@ -146,7 +145,13 @@ const AppLayout = () => {
                                         />
                                     </Tabs>
                                     <Box sx={{ p: 2 }}>
-                                        {tabValue === 0 && <Typography variant="body2">Notifications Tab Content</Typography>}
+                                        {tabValue === 0 && <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+                                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                                {noti.length <= 65 && <FaRobot size={20} />}
+                                                {noti}
+                                            </Box>
+                                        </Typography>}
+
                                         {tabValue === 1 && <Typography variant="body2">Messages Tab Content</Typography>}
                                         {tabValue === 2 && <Typography variant="body2">Chats Tab Content</Typography>}
                                         {tabValue === 3 && <Typography variant="body2">Sounds Tab Content</Typography>}

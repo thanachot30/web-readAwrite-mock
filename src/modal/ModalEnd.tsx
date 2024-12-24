@@ -8,6 +8,9 @@ interface ModalContextValue {
     isNoti: boolean
     openNoti: () => void;
     closeNoti: () => void;
+    //
+    noti: string;
+    setNotiMessage: (e: string) => void
 }
 
 // Create the context with a default value
@@ -17,20 +20,26 @@ export const ModalContext = createContext<ModalContextValue>({
     closeModal: () => { },
     isNoti: false,
     openNoti: () => { },
-    closeNoti: () => { }
+    closeNoti: () => { },
+    //
+    noti: '',
+    setNotiMessage: () => { }
 });
 
 const ModalEnd: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isNoti, setIsNoti] = useState(false)
+    const [noti, setnoti] = useState("")
 
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
     //
     const openNoti = () => setIsNoti(true)
     const closeNoti = () => setIsNoti(false)
+    //
+    const setNotiMessage = (e: string) => setnoti(e)
     return (
-        <ModalContext.Provider value={{ isOpen, openModal, closeModal, isNoti, openNoti, closeNoti }}>
+        <ModalContext.Provider value={{ isOpen, openModal, closeModal, isNoti, openNoti, closeNoti, noti, setNotiMessage }}>
             {children}
         </ModalContext.Provider>
     )

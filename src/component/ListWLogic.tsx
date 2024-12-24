@@ -10,107 +10,32 @@ import {
     Checkbox,
     ListItemAvatar,
     ListItemText,
+    SelectChangeEvent,
 } from '@mui/material';
 import StatusIcon from './StatusIcon';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useContext, useEffect, useState } from 'react';
+// import { ModalContext } from '../modal/ModalEnd';
+import { mockData, notifications, select_item } from '../common/share'
 import { ModalContext } from '../modal/ModalEnd';
 
-interface mockData {
-    id: number;
-    image: string;
-    title: string;
-    description: string;
-    stats: {
-        list: number;
-        views: number;
-        loves: number;
-    };
-}
 
 const ListWLogic = () => {
-    const { openNoti, closeNoti } = useContext(ModalContext);
+    const { setNotiMessage } = useContext(ModalContext);
     const [data, setdata] = useState<mockData[]>()
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
-
+    const [selectedValue, setSelectedValue] = useState<string>(select_item.invalid_select);
     const handleCheckboxChange = (id: number) => {
         setSelectedIds((prev) =>
             prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
         );
         //openNoti();
+
     };
-    const mockData: mockData[] = [
-        {
-            id: 1,
-            image: 'https://via.placeholder.com/150',
-            title: 'web story1',
-            description: 'บรรยาย (ออริจินอล) | author1',
-            stats: { list: 3, views: 10, loves: 5 },
-        },
-        {
-            id: 2,
-            image: 'https://via.placeholder.com/150',
-            title: 'web story2',
-            description: 'บรรยาย (ออริจินอล) | author2',
-            stats: { list: 5, views: 15, loves: 7 },
-        },
-        {
-            id: 3,
-            image: 'https://via.placeholder.com/150',
-            title: 'web story3',
-            description: 'บรรยาย (ออริจินอล) | author3',
-            stats: { list: 8, views: 20, loves: 10 },
-        },
-        {
-            id: 4,
-            image: 'https://via.placeholder.com/150',
-            title: 'web story4',
-            description: 'บรรยาย (ออริจินอล) | author4',
-            stats: { list: 2, views: 12, loves: 4 },
-        },
-        {
-            id: 5,
-            image: 'https://via.placeholder.com/150',
-            title: 'web story5',
-            description: 'บรรยาย (ออริจินอล) | author5',
-            stats: { list: 6, views: 25, loves: 12 },
-        },
-        {
-            id: 6,
-            image: 'https://via.placeholder.com/150',
-            title: 'web story6',
-            description: 'บรรยาย (ออริจินอล) | author6',
-            stats: { list: 4, views: 18, loves: 8 },
-        },
-        {
-            id: 7,
-            image: 'https://via.placeholder.com/150',
-            title: 'web story7',
-            description: 'บรรยาย (ออริจินอล) | author7',
-            stats: { list: 7, views: 30, loves: 15 },
-        },
-        {
-            id: 8,
-            image: 'https://via.placeholder.com/150',
-            title: 'web story8',
-            description: 'บรรยาย (ออริจินอล) | author8',
-            stats: { list: 9, views: 40, loves: 20 },
-        },
-        {
-            id: 9,
-            image: 'https://via.placeholder.com/150',
-            title: 'web story9',
-            description: 'บรรยาย (ออริจินอล) | author9',
-            stats: { list: 1, views: 5, loves: 2 },
-        },
-        {
-            id: 10,
-            image: 'https://via.placeholder.com/150',
-            title: 'web story10',
-            description: 'บรรยาย (ออริจินอล) | author10',
-            stats: { list: 10, views: 50, loves: 25 },
-        },
-    ];
+    const handleChange = (event: SelectChangeEvent<string>) => {
+        setSelectedValue(event.target.value); // Update state with selected value
+    };
+
     useEffect(() => {
         const _data = []
         const ranNum = Math.floor(Math.random() * mockData.length);
@@ -119,7 +44,21 @@ const ListWLogic = () => {
         setdata(_data)
     }, [])
 
-    console.log('selectedIds', selectedIds);
+    useEffect(() => {
+        if (selectedIds.length > 0 && selectedValue === select_item.valid_select) {
+            //console.log("send noti");
+            console.log(selectedIds[0]);
+            const find_mockData = notifications.find((e) => {
+                return e.id === selectedIds[0]
+            })
+            console.log(find_mockData?.type.length);
+
+            setNotiMessage(find_mockData?.type as string)
+        } else {
+            setNotiMessage("")
+        }
+    }, [selectedIds, selectedValue])
+
 
     return (
         <List sx={{ p: 0 }}>
@@ -197,7 +136,9 @@ const ListWLogic = () => {
 
                             </Button>
                             <Select
-                                defaultValue="ไม่เผยแพร่"
+                                disabled={selectedIds.length > 0 ? false : true}
+                                value={selectedValue}
+                                onChange={handleChange}
                                 sx={{
                                     height: '30px',
                                     minWidth: 120,
@@ -214,7 +155,7 @@ const ListWLogic = () => {
                                 }}
                             >
                                 {/* Dropdown Item */}
-                                <MenuItem value="เผยแพร่">
+                                <MenuItem value={select_item.valid_select}>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                         <Box
                                             sx={{
@@ -227,7 +168,7 @@ const ListWLogic = () => {
                                         <Typography sx={{ fontSize: "10px", }}>เผยแพร่</Typography>
                                     </Box>
                                 </MenuItem>
-                                <MenuItem value="ไม่เผยแพร่">
+                                <MenuItem value={select_item.invalid_select}>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                         <Box
                                             sx={{
