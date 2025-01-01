@@ -11,7 +11,9 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import { ModalContext } from '../modal/ModalEnd';
-import { FaRobot } from "react-icons/fa";
+import { notifications } from '../common/share';
+import Badge from '@mui/material/Badge';
+import { FaBullseye } from 'react-icons/fa';
 const AppLayout = () => {
     // const notifications = [
     //     { id: 1, message: 'New comment on your post' },
@@ -21,6 +23,8 @@ const AppLayout = () => {
     const { isNoti, openNoti, closeNoti, noti } = useContext(ModalContext);
     const [anchorEl, setAnchorEl] = useState<Element | null>(null); // State for the menu anchor
     const [tabValue, setTabValue] = useState(0);
+    const [notiMessage, setNotiMessage] = useState<string>()
+    const [invisibleBadge, setinvisibleBadge] = useState(true)
     // const open = Boolean(anchorEl);
 
     const handleOpenMenu = (event: any) => {
@@ -42,6 +46,21 @@ const AppLayout = () => {
         const buttonElement = document.querySelector('.MuiButtonBase-root');
         setAnchorEl(buttonElement);
     }, []); // Only run this effect once on mount
+
+    useEffect(() => {
+        //console.log(selectedIds, data_random);
+        if (noti !== "") {
+            const find_mockData = notifications.find((e) => {
+                //console.log(group);
+                return e.id === parseInt(noti)
+            })
+            setNotiMessage(find_mockData?.type)
+            setinvisibleBadge(false)
+        } else {
+            setNotiMessage("")
+            setinvisibleBadge(true)
+        }
+    }, [noti])
 
     return (
         <Box>
@@ -82,7 +101,10 @@ const AppLayout = () => {
                             </IconButton>
                             <Box>
                                 <IconButton onClick={handleOpenMenu} className="MuiButtonBase-root MuiIconButton-root">
-                                    <NotificationsIcon />
+                                    <Badge badgeContent={1} color="error" invisible={invisibleBadge} >
+                                        <NotificationsIcon />
+                                    </Badge>
+
                                 </IconButton>
                                 <Menu
                                     anchorEl={anchorEl}
@@ -147,8 +169,8 @@ const AppLayout = () => {
                                     <Box sx={{ p: 2 }}>
                                         {tabValue === 0 && <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
                                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                                {noti.length <= 65 && <FaRobot size={20} />}
-                                                {noti}
+
+                                                {notiMessage}
                                             </Box>
                                         </Typography>}
 

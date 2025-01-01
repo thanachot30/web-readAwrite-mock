@@ -16,15 +16,29 @@ import StatusIcon from './StatusIcon';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useContext, useEffect, useState } from 'react';
 // import { ModalContext } from '../modal/ModalEnd';
-import { mockData, notifications, select_item } from '../common/share'
+import { RandomData, _MockData, mockData, mockData_12, notifications, select_item } from '../common/share'
 import { ModalContext } from '../modal/ModalEnd';
+import { Login } from '@mui/icons-material';
+import { FaUser } from "react-icons/fa";
 
-
-const ListWLogic = () => {
+interface ListWLogicProps {
+    data: _MockData
+}
+interface status_numberProps {
+    _keep: string;
+    _see: string;
+    _love: string;
+}
+const ListWLogic: React.FC<ListWLogicProps> = ({ data }) => {
     const { setNotiMessage } = useContext(ModalContext);
-    const [data, setdata] = useState<mockData[]>()
+    const [data_random, set_data_random] = useState<RandomData[]>([]);
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     const [selectedValue, setSelectedValue] = useState<string>(select_item.invalid_select);
+    const [status_number, set_status_number] = useState<status_numberProps>({
+        _keep: Math.floor(Math.random() * 10).toString(),
+        _see: Math.floor(Math.random() * 100).toString(),
+        _love: Math.floor(Math.random() * 100).toString()
+    })
     const handleCheckboxChange = (id: number) => {
         setSelectedIds((prev) =>
             prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
@@ -35,34 +49,25 @@ const ListWLogic = () => {
     const handleChange = (event: SelectChangeEvent<string>) => {
         setSelectedValue(event.target.value); // Update state with selected value
     };
-
-    useEffect(() => {
-        const _data = []
-        const ranNum = Math.floor(Math.random() * mockData.length);
-        // push data to array to display
-        _data.push(mockData[ranNum])
-        setdata(_data)
-    }, [])
-
     useEffect(() => {
         if (selectedIds.length > 0 && selectedValue === select_item.valid_select) {
-            //console.log("send noti");
-            console.log(selectedIds[0]);
-            const find_mockData = notifications.find((e) => {
-                return e.id === selectedIds[0]
-            })
-            console.log(find_mockData?.type.length);
-
-            setNotiMessage(find_mockData?.type as string)
+            const group = selectedIds[0].toString().split(".")[0]
+            setNotiMessage(group)
         } else {
             setNotiMessage("")
         }
     }, [selectedIds, selectedValue])
 
+    useEffect(() => {
+        const ranNum = Math.floor(Math.random() * data.data_random.length);
+        console.log("ranNum", data.data_random.length, data.data_random[ranNum], ranNum);
+        set_data_random([data.data_random[ranNum]]);
+
+    }, [])
 
     return (
         <List sx={{ p: 0 }}>
-            {data?.map((item) => (
+            {data_random && data_random.map((item) => (
                 <ListItem
                     key={item.id}
                     sx={{
@@ -85,7 +90,7 @@ const ListWLogic = () => {
                     {/* Avatar */}
                     <ListItemAvatar>
                         <Avatar
-                            src={item.image}
+                            src={item.img}
                             alt={item.title}
                             sx={{ width: 56, height: 56, borderRadius: 1 }}
                         />
@@ -100,13 +105,23 @@ const ListWLogic = () => {
                         }
                         secondary={
                             <Box>
-                                <Typography variant="caption" color="GrayText">
-                                    {item.description}
-                                </Typography>
+                                <Box sx={{ display: "flex" }}>
+                                    <Typography variant="caption" color="GrayText">
+                                        {item.category}
+                                    </Typography>
+                                    <Box sx={{ ml: 1 }}>
+                                        <FaUser size={12} />
+                                        <Typography variant="caption" color="GrayText" sx={{ ml: 0.5 }}>
+                                            {item.author}
+                                        </Typography>
+                                    </Box>
+
+                                </Box>
+
                                 <StatusIcon
-                                    keep={item.stats.list.toString()}
-                                    see={item.stats.views.toString()}
-                                    love={item.stats.loves.toString()}
+                                    keep={status_number._keep}
+                                    see={status_number._see}
+                                    love={status_number._love}
                                 />
                             </Box>
                         }
@@ -185,7 +200,9 @@ const ListWLogic = () => {
                         </Box>
                     </Box>
                 </ListItem>
-            ))}
+            )
+            )
+            }
         </List>
     )
 }

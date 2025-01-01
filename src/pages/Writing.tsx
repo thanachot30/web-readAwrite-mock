@@ -16,15 +16,32 @@ import { MdEditNote } from "react-icons/md";
 import { MdManageSearch } from "react-icons/md";
 import ListFixedW from '../component/ListFixedW';
 import ListWLogic from '../component/ListWLogic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { _MockData, mockData_12 } from '../common/share';
 
 const WritingPage = () => {
 
     const [value, setValue] = useState(0);
-
+    const [data, setdata] = useState<_MockData>()
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
+
+    useEffect(() => {
+        const ranNum = Math.floor(Math.random() * mockData_12.length) + 1;
+        const _data: _MockData | undefined = mockData_12.find((item) => item.id === ranNum)
+        // console.log(_data);
+        // console.log('ranNum', ranNum);
+        // _data.push(mockData[ranNum])
+        if (_data) {
+            setdata(_data)
+        }
+        else {
+            console.log(`Object with id === ${ranNum} not found.`);
+
+        }
+
+    }, [])
     return (
         <Container maxWidth="md" sx={{ py: 3 }}>
             {/* Header Section */}
@@ -156,8 +173,9 @@ const WritingPage = () => {
                 </Button>
             </Box>
             <Box>
-                <ListWLogic />
-                <ListFixedW />
+                {data && <ListWLogic data={data} />}
+
+                {/* <ListFixedW /> */}
             </Box>
 
 

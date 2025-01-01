@@ -1,94 +1,9 @@
-import { Box, Typography, ImageList, ImageListItem, Chip } from '@mui/material';
+import { Box, Typography, ImageList, ImageListItem, Chip, Divider } from '@mui/material';
 import StatusIcon from './StatusIcon';
+import { mockData_Reading } from '../common/share';
 
 
-const mockData = [
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'ย้อนเวลามาเซ็นใบหย่า',
-        author: 'LEOI',
-        status: { keep: '9', views: '84K', love: '785' },
-        tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'คู่หมั้นที่เขาไม่รัก',
-        author: 'คนหลังเขา',
-        status: { keep: '13', views: '112K', love: '769' },
-        tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'ย้อนเวลามาเซ็นใบหย่า',
-        author: 'LEOI',
-        status: { keep: '9', views: '84K', love: '785' },
-        tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'คู่หมั้นที่เขาไม่รัก',
-        author: 'คนหลังเขา',
-        status: { keep: '13', views: '112K', love: '769' },
-        tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'ย้อนเวลามาเซ็นใบหย่า',
-        author: 'LEOI',
-        status: { keep: '9', views: '84K', love: '785' },
-        tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'คู่หมั้นที่เขาไม่รัก',
-        author: 'คนหลังเขา',
-        status: { keep: '13', views: '112K', love: '769' },
-        tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'ย้อนเวลามาเซ็นใบหย่า',
-        author: 'LEOI',
-        status: { keep: '9', views: '84K', love: '785' },
-        tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'คู่หมั้นที่เขาไม่รัก',
-        author: 'คนหลังเขา',
-        status: { keep: '13', views: '112K', love: '769' },
-        tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'ย้อนเวลามาเซ็นใบหย่า',
-        author: 'LEOI',
-        status: { keep: '9', views: '84K', love: '785' },
-        tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'คู่หมั้นที่เขาไม่รัก',
-        author: 'คนหลังเขา',
-        status: { keep: '13', views: '112K', love: '769' },
-        tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'ย้อนเวลามาเซ็นใบหย่า',
-        author: 'LEOI',
-        status: { keep: '9', views: '84K', love: '785' },
-        tags: ['ย้อนเวลา', 'ทักษิณ', 'หย่า'],
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'คู่หมั้นที่เขาไม่รัก',
-        author: 'คนหลังเขา',
-        status: { keep: '13', views: '112K', love: '769' },
-        tags: ['รักต่างวัย', 'ดราม่า', 'คู่หมั้น'],
-    },
-    // Add more items as needed
-];
+
 
 const ImageGridReading = () => {
     return (
@@ -99,10 +14,10 @@ const ImageGridReading = () => {
                     ใหม่มาแรง
                 </Typography>
             </Box>
-
+            <Divider />
             {/* Image List Content */}
             <ImageList cols={2} sx={{ justifyContent: 'space-around' }}> {/* Single-column layout for flex row */}
-                {mockData.map((item, index) => (
+                {mockData_Reading.map((item, index) => (
                     <ImageListItem
                         key={index}
                         sx={{
