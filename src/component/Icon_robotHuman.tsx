@@ -1,4 +1,4 @@
-import React from 'react'
+
 import icon from '../assets/robot_human.png'
 
 

@@ -28,7 +28,7 @@ interface status_numberProps {
 }
 
 const ListFixedW: React.FC<ListWLogicProps> = ({ data }) => {
-    const [status_number, set_status_number] = useState<status_numberProps>({
+    const [status_number] = useState<status_numberProps>({
         _keep: Math.floor(Math.random() * 10).toString(),
         _see: Math.floor(Math.random() * 100).toString(),
         _love: Math.floor(Math.random() * 100).toString()

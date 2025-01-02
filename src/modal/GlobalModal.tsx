@@ -1,4 +1,4 @@
-import { SetStateAction, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { ModalContext } from './ModalEnd';
 import { Box, Button, Modal, TextField, Typography } from '@mui/material';
 
@@ -51,6 +51,18 @@ const GlobalModal = () => {
                         //sx={{ mt: 2, ml: 2 }} // Margin for spacing
                         variant="contained"
                         size="small"
+                        sx={{
+                            borderRadius: '24px', // Fully rounded corners
+                            padding: '8px 24px', // Padding for a balanced look
+                            backgroundColor: '#4DD0E1', // Set the background color
+                            color: '#fff', // Set the text color for better contrast
+                            '&:hover': {
+                                backgroundColor: '#26C6DA', // Adjust hover color
+                            },
+                            '&:disabled': {
+                                backgroundColor: '#B2EBF2', // Optional: disabled state color
+                            },
+                        }}
                     >
                         go to Form
                     </Button>

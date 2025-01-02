@@ -16,9 +16,8 @@ import StatusIcon from './StatusIcon';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useContext, useEffect, useState } from 'react';
 // import { ModalContext } from '../modal/ModalEnd';
-import { RandomData, _MockData, mockData, mockData_12, notifications, select_item } from '../common/share'
+import { RandomData, _MockData, select_item } from '../common/share'
 import { ModalContext } from '../modal/ModalEnd';
-import { Login } from '@mui/icons-material';
 import { FaUser } from "react-icons/fa";
 
 interface ListWLogicProps {
@@ -34,7 +33,7 @@ const ListWLogic: React.FC<ListWLogicProps> = ({ data }) => {
     const [data_random, set_data_random] = useState<RandomData[]>([]);
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     const [selectedValue, setSelectedValue] = useState<string>(select_item.invalid_select);
-    const [status_number, set_status_number] = useState<status_numberProps>({
+    const [status_number] = useState<status_numberProps>({
         _keep: Math.floor(Math.random() * 10).toString(),
         _see: Math.floor(Math.random() * 100).toString(),
         _love: Math.floor(Math.random() * 100).toString()
