@@ -13,14 +13,13 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import { ModalContext } from '../modal/ModalEnd';
 import { notifications } from '../common/share';
 import Badge from '@mui/material/Badge';
-import { FaBullseye } from 'react-icons/fa';
+import { FaRobot } from "react-icons/fa";
+import { BsPeopleFill } from "react-icons/bs";
+import Icon_robotHuman from './Icon_robotHuman'
+import GlobalModal from '../modal/GlobalModal';
+
 const AppLayout = () => {
-    // const notifications = [
-    //     { id: 1, message: 'New comment on your post' },
-    //     { id: 2, message: 'Your order has been shipped' },
-    //     { id: 3, message: 'You have a new follower' },
-    // ];
-    const { isNoti, openNoti, closeNoti, noti } = useContext(ModalContext);
+    const { isNoti, openNoti, closeNoti, noti, openModal } = useContext(ModalContext);
     const [anchorEl, setAnchorEl] = useState<Element | null>(null); // State for the menu anchor
     const [tabValue, setTabValue] = useState(0);
     const [notiMessage, setNotiMessage] = useState<string>()
@@ -35,6 +34,7 @@ const AppLayout = () => {
     const handleCloseMenu = () => {
         setAnchorEl(null);
         closeNoti()
+        openModal()
     };
     const handleTabChange = (_event: any, newValue: any) => {
         setTabValue(newValue);
@@ -168,8 +168,12 @@ const AppLayout = () => {
                                     </Tabs>
                                     <Box sx={{ p: 2 }}>
                                         {tabValue === 0 && <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
-                                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-
+                                            <Box sx={{ display: 'flex', alignItems: "center" }}>
+                                                <Box sx={{ m: 1 }}>
+                                                    {[1, 4, 7, 10].includes(parseInt(noti)) && <FaRobot size={22} />}
+                                                    {[2, 5, 8, 11].includes(parseInt(noti)) && <BsPeopleFill size={22} />}
+                                                    {[3, 6, 9, 12].includes(parseInt(noti)) && <Icon_robotHuman />}
+                                                </Box>
                                                 {notiMessage}
                                             </Box>
                                         </Typography>}
@@ -194,7 +198,7 @@ const AppLayout = () => {
 
             <Box component="main" sx={{ pt: 6 }}>
                 <Outlet />
-                {/* <GlobalModal /> */}
+                <GlobalModal />
             </Box>
 
         </Box>

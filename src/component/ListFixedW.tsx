@@ -14,46 +14,32 @@ import {
 } from '@mui/material';
 import StatusIcon from './StatusIcon';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { _MockData } from '../common/share';
+import { useState } from 'react';
+import { FaUser } from 'react-icons/fa';
 
+interface ListWLogicProps {
+    data: _MockData
+}
+interface status_numberProps {
+    _keep: string;
+    _see: string;
+    _love: string;
+}
 
+const ListFixedW: React.FC<ListWLogicProps> = ({ data }) => {
+    const [status_number, set_status_number] = useState<status_numberProps>({
+        _keep: Math.floor(Math.random() * 10).toString(),
+        _see: Math.floor(Math.random() * 100).toString(),
+        _love: Math.floor(Math.random() * 100).toString()
+    })
 
-const ListFixedW = () => {
-    const mockData = [
-        {
-            id: 2,
-            image: 'https://via.placeholder.com/150',
-            title: 'story2',
-            description: 'บรรยาย (ออริจินอล) | author2',
-            stats: { list: 5, views: 15, loves: 7 },
-        },
-        {
-            id: 3,
-            image: 'https://via.placeholder.com/150',
-            title: 'story3',
-            description: 'บรรยาย (ออริจินอล) | author3',
-            stats: { list: 2, views: 12, loves: 4 },
-        },
-        {
-            id: 4,
-            image: 'https://via.placeholder.com/150',
-            title: 'story4',
-            description: 'บรรยาย (ออริจินอล) | author4',
-            stats: { list: 3, views: 10, loves: 6 },
-        },
-        {
-            id: 5,
-            image: 'https://via.placeholder.com/150',
-            title: 'story5',
-            description: 'บรรยาย (ออริจินอล) | author5',
-            stats: { list: 1, views: 5, loves: 2 },
-        },
-    ];
     return (
         <>
             <List>
-                {mockData.map((item) => (
+                {data.data_fixed && data.data_fixed.map((item, index) => (
                     <ListItem
-                        key={item.id}
+                        key={index}
                         sx={{
                             p: 1,
                             mb: 1,
@@ -71,7 +57,7 @@ const ListFixedW = () => {
                         {/* Avatar */}
                         <ListItemAvatar>
                             <Avatar
-                                src={item.image}
+                                src={item.img}
                                 alt={item.title}
                                 sx={{ width: 56, height: 56, borderRadius: 1 }}
                             />
@@ -86,13 +72,22 @@ const ListFixedW = () => {
                             }
                             secondary={
                                 <Box>
-                                    <Typography variant="caption" color="GrayText">
-                                        {item.description}
-                                    </Typography>
+                                    <Box sx={{ display: "flex" }}>
+                                        <Typography variant="caption" color="GrayText">
+                                            {item.category}
+                                        </Typography>
+                                        <Box sx={{ ml: 1 }}>
+                                            <FaUser size={12} />
+                                            <Typography variant="caption" color="GrayText" sx={{ ml: 0.5 }}>
+                                                {item.author}
+                                            </Typography>
+                                        </Box>
+
+                                    </Box>
                                     <StatusIcon
-                                        keep={item.stats.list.toString()}
-                                        see={item.stats.views.toString()}
-                                        love={item.stats.loves.toString()}
+                                        keep={status_number._keep}
+                                        see={status_number._see}
+                                        love={status_number._love}
                                     />
                                 </Box>
                             }

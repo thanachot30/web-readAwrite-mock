@@ -28,7 +28,6 @@ const ImageGridReading = () => {
                             //border: '1px solid #e0e0e0', // Optional border for clarity
                         }}
                     >
-
                         <Box
                             sx={{
                                 flexShrink: 0, // Prevent the image from shrinking

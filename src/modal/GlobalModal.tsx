@@ -1,10 +1,21 @@
-import { useContext } from 'react'
+import { SetStateAction, useContext, useState } from 'react'
 import { ModalContext } from './ModalEnd';
-import { Box, Button, Modal, Typography } from '@mui/material';
+import { Box, Button, Modal, TextField, Typography } from '@mui/material';
 
 
 const GlobalModal = () => {
     const { isOpen } = useContext(ModalContext);
+    const [email, setEmail] = useState('');
+    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value); // Update the state when the user types
+    };
+    const generateFormLink = () => {
+        if (email != '') {
+            const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScKSWblfLa0OayI4b-Gmt2pGco5fUEsZXZPYLEBLTCq55EJzg/viewform?usp=pp_url&entry.1385240585=${email}`;
+            return baseUrl;
+        }
+
+    };
     return (
         <Modal open={isOpen} >
             <Box
@@ -23,16 +34,25 @@ const GlobalModal = () => {
             >
                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <Typography variant="h6">จบการทดสอบ</Typography>
+                    <TextField
+                        label="Enter your email"
+                        variant="outlined"
+                        size="small"
+                        value={email}
+                        onChange={handleEmailChange}
+                        sx={{ m: 1, width: '300px' }}
+                    />
                     <Button
+                        disabled={email != '' ? false : true}
                         component="a" // Use 'a' element for navigation
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSewltwA_6cqWtpzKb3kj8OTCDC15hhUDfy9etwR5iNNfcUDNg/viewform?usp=pp_url&entry.907792499=action" // Replace with your Google Form URL
-                        target="_blank" // Open in a new tab
+                        href={generateFormLink()}
+                        target="_blank" // Open in a new tab    
                         rel="noopener noreferrer" // For security reasons
                         //sx={{ mt: 2, ml: 2 }} // Margin for spacing
                         variant="contained"
                         size="small"
                     >
-                        Open Google Form
+                        go to Form
                     </Button>
                 </Box>
 

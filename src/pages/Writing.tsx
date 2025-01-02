@@ -174,8 +174,8 @@ const WritingPage = () => {
             </Box>
             <Box>
                 {data && <ListWLogic data={data} />}
+                {data?.data_fixed && <ListFixedW data={data} />}
 
-                {/* <ListFixedW /> */}
             </Box>
 
 
