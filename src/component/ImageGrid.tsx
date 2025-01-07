@@ -4,126 +4,20 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Link } from 'react-router-dom';
 import InfoImageGrid from './InfoImageGrid';
-
-
-const gridData = [
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'ทะลุมิติไปเป็นนางร้ายเมียพระเอก',
-        writer: 'Ammara Writes',
-        status: {
-            love: '252',
-            see: '57K',
-            keep: '12',
-        },
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'เมื่อฉันต้องเลี้ยงนางร้าย (มี E-book)',
-        writer: 'Sukanya Novels',
-        status: {
-            love: '185',
-            see: '45K',
-            keep: '8',
-        },
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'ยอมหย่าให้แล้วนะคุณสามี',
-        writer: 'Narisa Tales',
-        status: {
-            love: '300',
-            see: '60K',
-            keep: '15',
-        },
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'คู่หมั้นที่เขาไม่รัก',
-        writer: 'Pimdao Fiction',
-        status: {
-            love: '400',
-            see: '72K',
-            keep: '20',
-        },
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'แค่สามีไม่รัก',
-        writer: 'Tanya Writes',
-        status: {
-            love: '210',
-            see: '50K',
-            keep: '10',
-        },
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'ย้อนเวลามาเซ็นใบหย่า',
-        writer: 'Kamol Fiction',
-        status: {
-            love: '320',
-            see: '65K',
-            keep: '18',
-        },
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'เพิ่มอีกหนึ่ง',
-        writer: 'Chalita Tales',
-        status: {
-            love: '100',
-            see: '25K',
-            keep: '5',
-        },
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'คู่หมั้นที่เขาไม่รัก',
-        writer: 'Pimdao Fiction',
-        status: {
-            love: '410',
-            see: '70K',
-            keep: '22',
-        },
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'แค่สามีไม่รัก',
-        writer: 'Tanya Writes',
-        status: {
-            love: '250',
-            see: '55K',
-            keep: '14',
-        },
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'ย้อนเวลามาเซ็นใบหย่า',
-        writer: 'Kamol Fiction',
-        status: {
-            love: '350',
-            see: '68K',
-            keep: '16',
-        },
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'เพิ่มอีกหนึ่ง',
-        writer: 'Chalita Tales',
-        status: {
-            love: '120',
-            see: '28K',
-            keep: '7',
-        },
-    },
-];
+import { GridData } from '../common/share';
 
 
 
 const iconSize = 8
 
-const ImageGrid = () => {
+type Props = {
+    data: GridData[],
+    title: string,
+    name: string
+}
+
+
+const ImageGrid = (props: Props) => {
     const scrollContainerRef = useRef<HTMLUListElement | null>(null);
 
     const scroll = (direction: 'left' | 'right') => {
@@ -137,13 +31,13 @@ const ImageGrid = () => {
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mx: 6 }}>
-                <Typography>
-                    นิยายรัก
+                <Typography variant='h5'>
+                    {props.title}
                 </Typography>
 
                 <Typography
                     component={Link} // Use Link for navigation
-                    to="/reading" // Navigate to '/'
+                    to={`/reading?name=${props.name}&title=${props.title}`} // Navigate to '/'
                     sx={{
                         fontSize: '12px', fontWeight: 'bold', color: '#21c3bb', textDecoration: 'none', // Remove underline for the link
                         cursor: 'pointer',
@@ -187,29 +81,36 @@ const ImageGrid = () => {
                     cols={5} // Show up to 6 images at a time
                 //rowHeight={150} // Row height for consistent layout
                 >
-                    {gridData.map((item, index) => (
-                        <Box sx={{ display: 'flex', flexDirection: 'column', mx: 1 }}>
+                    {props.data.map((item, index) => (
+                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                             <ImageListItem key={index} sx={{
                                 flex: '0 0 auto', // Prevent shrinking
-                                width: 120, // Set width
-                                height: 120, // Set height
+                                width: 180, // Set width
+                                height: 180, // Set height
                                 overflow: 'hidden', // Ensure content doesn't overflow
                                 borderRadius: 2, // Optional: Rounded corners
                             }}>
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    loading="lazy"
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'cover',
-                                        borderRadius: `${iconSize}px`,
-                                    }}
-                                />
+                                <Box sx={{ m: 0.5 }}>
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        loading="lazy"
+                                        style={{
+                                            width: '160px',
+                                            height: '160px',
+                                            objectFit: 'cover',
+                                            borderRadius: `${iconSize}px`,
+                                        }}
+                                    />
+                                </Box>
+
+                                <Box>
+                                    <InfoImageGrid status={item.status} title={item.title} writer={item.writer} />
+                                </Box>
+
 
                             </ImageListItem>
-                            <InfoImageGrid status={item.status} title={item.title} writer={item.writer} />
+
                         </Box>
 
 

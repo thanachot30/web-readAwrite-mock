@@ -1,21 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container, Typography, Tabs, Tab, Stack, Chip } from '@mui/material';
 import ImageGridReading from '../component/ImageGridReading';
-
-
+import { useLocation } from 'react-router-dom';
+import { GridData } from '../common/share';
+import { Data_BoyLoveNovel, Data_GirlLoveNovel, Data_LoveNovel } from '../common/share';
 
 const Reading = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const name = queryParams.get('name');
+    const title = queryParams.get('title')
     const [value, setValue] = React.useState(0);
+    const [data, setdata] = useState<GridData[]>()
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
 
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to top
+        console.log('name', name, title);
+        switch (name) {
+            case "LoveNovel":
+                setdata(Data_LoveNovel)
+                break;
+            case "BoyLoveNovel":
+                setdata(Data_BoyLoveNovel)
+                break;
+            case "GirlLoveNovel":
+                setdata(Data_GirlLoveNovel)
+                break
+        }
+
+    }, [])
+
     return (
         <Container maxWidth="md" sx={{ mt: 3 }}>
             {/* Title */}
             <Typography variant="h5" sx={{ textAlign: 'center', mb: 2 }}>
-                นิยายรัก
+                {title}
             </Typography>
 
             {/* Navigation Tabs */}
@@ -77,7 +100,8 @@ const Reading = () => {
                     variant="outlined"
                 />
             </Stack>
-            <ImageGridReading />
+            {data && name && <ImageGridReading data={data} name={name} />}
+
 
         </Container>
     );

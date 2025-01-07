@@ -1,11 +1,15 @@
 import { Box, Typography, ImageList, ImageListItem, Chip, Divider } from '@mui/material';
 import StatusIcon from './StatusIcon';
-import { mockData_Reading } from '../common/share';
+import { GridData } from '../common/share';
+import { useNavigate } from 'react-router-dom';
+type Props = {
+    data: GridData[],
+    name: string
+}
 
 
-
-
-const ImageGridReading = () => {
+const ImageGridReading = (props: Props) => {
+    const navigate = useNavigate();
     return (
         <Box>
             {/* Section Title */}
@@ -17,7 +21,7 @@ const ImageGridReading = () => {
             <Divider />
             {/* Image List Content */}
             <ImageList cols={2} sx={{ justifyContent: 'space-around' }}> {/* Single-column layout for flex row */}
-                {mockData_Reading.map((item, index) => (
+                {props.data.map((item, index) => (
                     <ImageListItem
                         key={index}
                         sx={{
@@ -31,10 +35,10 @@ const ImageGridReading = () => {
                         <Box
                             sx={{
                                 flexShrink: 0, // Prevent the image from shrinking
-                                width: '120px',
-                                height: '120px',
+                                width: '180px',
+                                height: '180px',
                                 overflow: 'hidden',
-                                borderRadius: 1,
+                                borderRadius: 2,
                             }}
                         >
                             <img
@@ -58,6 +62,17 @@ const ImageGridReading = () => {
                                         fontSize: '12px',
                                         fontWeight: 'bold',
                                         mb: 0.5,
+                                        textDecoration: 'none', // Remove underline for the link
+                                        cursor: item.id === 1 || item.id === 2 ? 'pointer' : 'default', // Pointer only for id 1 and 2
+                                        color: item.id === 1 || item.id === 2 ? 'inherit' : 'gray', // Different color for non-clickable items
+                                        '&:hover': {
+                                            color: item.id === 1 || item.id === 2 ? '#21c3bb' : 'inherit', // Hover effect only for id 1 and 2
+                                        },
+                                    }}
+                                    onClick={() => {
+                                        if (item.id === 1 || item.id === 2) {
+                                            navigate(`/reading/detail?name=${props.name}&id=${item.id}`); // Navigate programmatically
+                                        }
                                     }}
                                 >
                                     {item.title}
@@ -67,7 +82,7 @@ const ImageGridReading = () => {
                                 sx={{
                                     // flex: '0 1 auto',
                                     display: 'flex',
-                                    justifyContent: 'end',
+                                    justifyContent: 'flex-end',
                                     flexDirection: 'column',
 
                                 }}>
@@ -77,18 +92,18 @@ const ImageGridReading = () => {
                                         color: 'text.secondary',
                                     }}
                                 >
-                                    {item.author}
+                                    {item.writer}
                                 </Typography>
 
                                 <StatusIcon
                                     keep={item.status.keep}
-                                    see={item.status.views}
+                                    see={item.status.see}
                                     love={item.status.love}
                                 />
 
                                 {/* Tags Section */}
                                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                                    {item.tags.map((tag, i) => (
+                                    {item.tags && item.tags.map((tag, i) => (
                                         <Chip
                                             key={i}
                                             label={tag}
@@ -98,7 +113,6 @@ const ImageGridReading = () => {
                                     ))}
                                 </Box>
                             </Box>
-
                         </Box>
                     </ImageListItem>
                 ))}
