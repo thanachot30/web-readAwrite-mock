@@ -1,9 +1,14 @@
-import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material'
+import { Box, Button, Chip, Container, Grid, IconButton, Paper, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
-import { Data_BoyLoveNovel, Data_GirlLoveNovel, Data_LoveNovel, GridData } from '../common/share';
+import { Data_BoyLoveNovel, Data_GirlLoveNovel, Data_LoveNovel, GridData, ReviewNotification, notiReader } from '../common/share';
 import Footer from '../component/Footer';
-
+import { RxAvatar } from "react-icons/rx";
+import { FaRobot } from 'react-icons/fa';
+import { BsPeopleFill } from 'react-icons/bs';
+import Icon_robotHuman from '../component/Icon_robotHuman';
+import { Tag as TagIcon } from '@mui/icons-material'; // Example tag icon
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 const ReadingDetail = () => {
@@ -12,6 +17,12 @@ const ReadingDetail = () => {
     const name = queryParams.get('name');
     const id = queryParams.get('id')
     const [data, setdata] = useState<GridData>()
+    const [dataNoti, setdataNoti] = useState<ReviewNotification | undefined>()
+    const ranNum = Math.floor(Math.random() * 6) + 1;
+    const noti = notiReader.find((item) => item.id === ranNum)
+    const icon_size = 50
+    const tags = ["โรแมนติก", "มาเฟีย", "18+", "รักต่างวัย", "นิยายรัก", "น่ารัก", "พระเอกกินเด็ก", "พระเอกสายเปย์", "พระเอกปากร้าย"];
+
     useEffect(() => {
         window.scrollTo(0, 0); // Scroll to top
         console.log('name', name, id);
@@ -29,31 +40,26 @@ const ReadingDetail = () => {
                 setdata(_dataGirl)
                 break
         }
+        // random noti
+
+        setdataNoti(noti)
 
     }, [])
     return (
 
         <Box>
-            <Box
-            // sx={{
-            //     backgroundColor: '#000', // Black background for the entire container
-            //     minHeight: '100%', // Full viewport height
-            //     display: 'flex',
-            //     justifyContent: 'center',
-            //     alignItems: 'center',
-            // }}
-            >
-                <Container maxWidth="lg" sx={{ mt: 3 }}>
-                    <Grid container sx={{ height: 'auto' }}>
+            <Box>
+                <Container maxWidth="lg" sx={{ mt: 0 }}>
+                    <Grid container spacing={2} sx={{ height: 'auto' }}>
                         {/* Left Half: Image */}
-                        <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
-                            <Box sx={{ display: 'flex', justifyContent: 'flex-end', height: "500px", width: "100%", }}>
+                        <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'flex-start', height: "500px", width: "100%", }}>
                                 <img
                                     src={data?.image}
                                     alt={data?.title}
                                     loading="lazy"
                                     style={{
-                                        width: '80%',
+                                        width: '100%',
                                         // height: '100%',
                                         // borderRadius: `${2}px`,
                                     }}
@@ -77,8 +83,9 @@ const ReadingDetail = () => {
                         <Grid
                             item
                             xs={12}
-                            md={6}
+                            md={8}
                             sx={{
+
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'center',
@@ -87,38 +94,93 @@ const ReadingDetail = () => {
                                 color: '#fff', // Text color
                             }}
                         >
-                            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
-                                สยบพันธะร้าย มาเฟียเพื่อนสนิท
-                            </Typography>
-                            <Typography variant="body1" sx={{ mb: 4 }}>
-                                แม้จะรู้จักกันมานาน แต่สำหรับเขา...ผู้ชายกับผู้หญิงก็เป็น ‘เพื่อน’ กันไม่ได้อยู่ดี
-                            </Typography>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                                <Typography variant="body2">นิยายรัก (18+)</Typography>
-                                <Typography variant="body2">4 ตอน</Typography>
-                            </Box>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                                <Typography variant="body2">❤️ 1.88K คนเลิฟเรื่องนี้</Typography>
-                                <Typography variant="body2">👁️ 77.28K</Typography>
-                                <Typography variant="body2">💬 2.4K</Typography>
-                                <Typography variant="body2">📚 9.2K</Typography>
-                            </Box>
-                            <Box sx={{ display: 'flex', gap: 2 }}>
-                                <Button variant="contained" color="primary">
-                                    อ่านเลย
-                                </Button>
-                                <Button variant="outlined" color="secondary">
-                                    เพิ่มเข้าชั้น
-                                </Button>
-                            </Box>
+                            <Grid container spacing={2}>
+                                <Grid item xs={6} md={8}>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', textAlign: 'center', gap: 1 }}>
+                                        <Typography variant="h6" >
+                                            {name}
+                                        </Typography>
+                                        <Chip label={`${data?.episode} ตอน`} sx={{ color: 'white', bgcolor: 'gray' }} size='small' />
+                                    </Box>
+
+                                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', textAlign: 'center', gap: 1, my: 1 }}>
+                                        <Chip label={"จบ"} size='small' sx={{ color: 'white', bgcolor: "#21c3bb", px: 0.5 }} />
+                                        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                                            {data?.title}
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', textAlign: 'center', gap: 1 }}>
+                                        <RxAvatar size={20} />
+                                        <Typography>
+                                            {data?.writer}
+                                        </Typography>
+                                        <Chip label={"ติดตาม"} size='small' sx={{ px: 0.5, color: 'white', border: '1px solid ' }} />
+                                    </Box>
+
+                                    <Box sx={{ display: 'flex', alignItems: "center", bgcolor: "#21c3bb", p: 1, mt: 1 }}>
+                                        <Box sx={{ m: 1 }}>
+                                            {[1, 4].includes((ranNum)) && <FaRobot size={icon_size} color="black" />}
+                                            {[2, 5].includes((ranNum)) && <BsPeopleFill size={icon_size} color="black" />}
+                                            {[3, 6].includes((ranNum)) && <Icon_robotHuman _height={icon_size} _width={icon_size} />}
+                                        </Box>
+                                        <Typography sx={{ fontSize: '12px' }}>
+                                            {dataNoti && dataNoti.type.trim()}
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+
+                                <Grid item xs={6} md={4}>
+
+                                    {dataNoti && dataNoti.content?.map((item) => (
+                                        <Box sx={{ bgcolor: "#21c3bb" }}>
+                                            <Typography sx={{ fontSize: '8px', px: 1, py: 1 }}>
+                                                {item.title}
+                                                {item.description}
+                                            </Typography>
+                                        </Box>
+
+                                    ))}
+
+
+                                </Grid>
+                            </Grid>
+
                         </Grid>
                     </Grid>
                 </Container>
             </Box>
 
+
             {/* story */}
             <Box>
                 <Container maxWidth="lg" >
+                    <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 1, p: 2 }}>
+                        {/* Highlighted Chip */}
+                        <Chip
+                            label="โรแมนติก"
+                            sx={{ fontWeight: 'bold', border: '1px solid #21c3bb' }}
+                        />
+
+                        {/* Tag Icon */}
+                        <IconButton size="small">
+                            <TagIcon />
+                        </IconButton>
+
+                        {/* Dynamic Chips */}
+                        {tags.slice(1).map((tag, index) => (
+                            <Chip
+                                key={index}
+                                label={tag}
+                                variant="outlined"
+                                sx={{ fontSize: '14px', borderRadius: '16px' }}
+                            />
+                        ))}
+
+                        {/* Expand Icon */}
+                        <IconButton size="small">
+                            <ExpandMoreIcon />
+                        </IconButton>
+                    </Box>
                     <Paper
                         elevation={2}
                         sx={{

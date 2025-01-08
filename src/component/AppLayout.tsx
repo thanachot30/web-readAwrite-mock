@@ -19,12 +19,13 @@ import Icon_robotHuman from './Icon_robotHuman'
 import GlobalModal from '../modal/GlobalModal';
 
 const AppLayout = () => {
-    const { isNoti, openNoti, closeNoti, noti, openModal } = useContext(ModalContext);
+    const { isNoti, openNoti, closeNoti, noti, } = useContext(ModalContext);
     const [anchorEl, setAnchorEl] = useState<Element | null>(null); // State for the menu anchor
     const [tabValue, setTabValue] = useState(0);
     const [notiMessage, setNotiMessage] = useState<string>()
     const [invisibleBadge, setinvisibleBadge] = useState(true)
     // const open = Boolean(anchorEl);
+    const icon_size = 60
 
     const handleOpenMenu = (event: any) => {
         setAnchorEl(event.currentTarget);
@@ -34,7 +35,7 @@ const AppLayout = () => {
     const handleCloseMenu = () => {
         setAnchorEl(null);
         closeNoti()
-        openModal()
+
     };
     const handleTabChange = (_event: any, newValue: any) => {
         setTabValue(newValue);
@@ -170,9 +171,9 @@ const AppLayout = () => {
                                         {tabValue === 0 && <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
                                             <Box sx={{ display: 'flex', alignItems: "center" }}>
                                                 <Box sx={{ m: 1 }}>
-                                                    {[1, 4, 7, 10].includes(parseInt(noti)) && <FaRobot size={22} />}
-                                                    {[2, 5, 8, 11].includes(parseInt(noti)) && <BsPeopleFill size={22} />}
-                                                    {[3, 6, 9, 12].includes(parseInt(noti)) && <Icon_robotHuman />}
+                                                    {[1, 4, 7, 10].includes(parseInt(noti)) && <FaRobot size={icon_size} />}
+                                                    {[2, 5, 8, 11].includes(parseInt(noti)) && <BsPeopleFill size={icon_size} />}
+                                                    {[3, 6, 9, 12].includes(parseInt(noti)) && <Icon_robotHuman _width={icon_size} _height={icon_size} />}
                                                 </Box>
                                                 {notiMessage}
                                             </Box>

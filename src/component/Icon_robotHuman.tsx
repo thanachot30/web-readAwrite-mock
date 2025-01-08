@@ -1,10 +1,13 @@
 
 import icon from '../assets/robot_human.png'
 
-
-const Icon_robotHuman = () => {
+type Props = {
+    _width: number,
+    _height: number
+}
+const Icon_robotHuman = (props: Props) => {
     return (
-        <img src={icon} alt="Icon" style={{ width: '35px', height: '35px' }} />
+        <img src={icon} alt="Icon" style={{ width: `${props._width}px`, height: `${props._height}px` }} />
     )
 }
 
