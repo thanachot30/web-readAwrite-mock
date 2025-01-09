@@ -17,9 +17,12 @@ import { FaRobot } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
 import Icon_robotHuman from './Icon_robotHuman'
 import GlobalModal from '../modal/GlobalModal';
+import ReaderModalEnd from '../modal/ReaderModalEnd';
+import WriterModalEnd from '../modal/WriterModalEnd';
+import WriterModalShare from '../modal/WriterModalShare';
 
 const AppLayout = () => {
-    const { isNoti, openNoti, closeNoti, noti, } = useContext(ModalContext);
+    const { isNoti, openNoti, closeNoti, noti, openWriteModal } = useContext(ModalContext);
     const [anchorEl, setAnchorEl] = useState<Element | null>(null); // State for the menu anchor
     const [tabValue, setTabValue] = useState(0);
     const [notiMessage, setNotiMessage] = useState<string>()
@@ -35,6 +38,7 @@ const AppLayout = () => {
     const handleCloseMenu = () => {
         setAnchorEl(null);
         closeNoti()
+        openWriteModal()
 
     };
     const handleTabChange = (_event: any, newValue: any) => {
@@ -61,7 +65,7 @@ const AppLayout = () => {
             setNotiMessage("")
             setinvisibleBadge(true)
         }
-    }, [noti])
+    }, [isNoti])//noti//isNoti
 
     return (
         <Box>
@@ -200,6 +204,9 @@ const AppLayout = () => {
             <Box component="main" sx={{ pt: 6 }}>
                 <Outlet />
                 <GlobalModal />
+                <ReaderModalEnd />
+                <WriterModalEnd />
+                <WriterModalShare />
             </Box>
 
         </Box>

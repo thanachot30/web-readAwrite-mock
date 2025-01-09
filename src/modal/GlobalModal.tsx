@@ -33,7 +33,7 @@ const GlobalModal = () => {
                 }}
             >
                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <Typography variant="h6">จบการทดสอบ</Typography>
+                    <Typography variant="h6">เริ่มการทดสอบ</Typography>
                     <TextField
                         label="Enter your email"
                         variant="outlined"

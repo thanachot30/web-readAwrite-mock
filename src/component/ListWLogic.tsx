@@ -29,7 +29,7 @@ interface status_numberProps {
     _love: string;
 }
 const ListWLogic: React.FC<ListWLogicProps> = ({ data }) => {
-    const { setNotiMessage } = useContext(ModalContext);
+    const { setNotiMessage, openShaer, closeShaer } = useContext(ModalContext);
     const [data_random, set_data_random] = useState<RandomData[]>([]);
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     const [selectedValue, setSelectedValue] = useState<string>(select_item.invalid_select);
@@ -42,8 +42,6 @@ const ListWLogic: React.FC<ListWLogicProps> = ({ data }) => {
         setSelectedIds((prev) =>
             prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
         );
-        //openNoti();
-
     };
     const handleChange = (event: SelectChangeEvent<string>) => {
         setSelectedValue(event.target.value); // Update state with selected value
@@ -52,8 +50,10 @@ const ListWLogic: React.FC<ListWLogicProps> = ({ data }) => {
         if (selectedIds.length > 0 && selectedValue === select_item.valid_select) {
             const group = selectedIds[0].toString().split(".")[0]
             setNotiMessage(group)
+            openShaer()
         } else {
             setNotiMessage("")
+            closeShaer()
         }
     }, [selectedIds, selectedValue])
 

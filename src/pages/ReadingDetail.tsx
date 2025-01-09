@@ -1,5 +1,5 @@
 import { Box, Button, Chip, Container, Grid, IconButton, Paper, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import { Data_BoyLoveNovel, Data_GirlLoveNovel, Data_LoveNovel, GridData, ReviewNotification, notiReader } from '../common/share';
 import Footer from '../component/Footer';
@@ -7,15 +7,18 @@ import { RxAvatar } from "react-icons/rx";
 import { FaRobot } from 'react-icons/fa';
 import { BsPeopleFill } from 'react-icons/bs';
 import Icon_robotHuman from '../component/Icon_robotHuman';
-import { Tag as TagIcon } from '@mui/icons-material'; // Example tag icon
+import { BookmarkBorder, FavoriteBorder, Visibility } from '@mui/icons-material'; // Example tag icon
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import { CiShoppingTag } from "react-icons/ci";
+import { ModalContext } from '../modal/ModalEnd';
 
 const ReadingDetail = () => {
+    const { openReadModal, setreadPrefill } = useContext(ModalContext);
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const name = queryParams.get('name');
     const id = queryParams.get('id')
+    const story = queryParams.get('story')
     const [data, setdata] = useState<GridData>()
     const [dataNoti, setdataNoti] = useState<ReviewNotification | undefined>()
     const ranNum = Math.floor(Math.random() * 6) + 1;
@@ -41,8 +44,16 @@ const ReadingDetail = () => {
                 break
         }
         // random noti
-
         setdataNoti(noti)
+        //
+        const _data = {
+            expertNumber: ranNum,
+            group: "",
+            story: story ?? "",
+            category: name ?? ""
+        }
+
+        setreadPrefill(_data)
 
     }, [])
     return (
@@ -95,37 +106,88 @@ const ReadingDetail = () => {
                             }}
                         >
                             <Grid container spacing={2}>
-                                <Grid item xs={6} md={8}>
-                                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', textAlign: 'center', gap: 1 }}>
-                                        <Typography variant="h6" >
-                                            {name}
-                                        </Typography>
-                                        <Chip label={`${data?.episode} ตอน`} sx={{ color: 'white', bgcolor: 'gray' }} size='small' />
-                                    </Box>
-
-                                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', textAlign: 'center', gap: 1, my: 1 }}>
-                                        <Chip label={"จบ"} size='small' sx={{ color: 'white', bgcolor: "#21c3bb", px: 0.5 }} />
-                                        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-                                            {data?.title}
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', textAlign: 'center', gap: 1 }}>
-                                        <RxAvatar size={20} />
-                                        <Typography>
-                                            {data?.writer}
-                                        </Typography>
-                                        <Chip label={"ติดตาม"} size='small' sx={{ px: 0.5, color: 'white', border: '1px solid ' }} />
-                                    </Box>
-
-                                    <Box sx={{ display: 'flex', alignItems: "center", bgcolor: "#21c3bb", p: 1, mt: 1 }}>
-                                        <Box sx={{ m: 1 }}>
-                                            {[1, 4].includes((ranNum)) && <FaRobot size={icon_size} color="black" />}
-                                            {[2, 5].includes((ranNum)) && <BsPeopleFill size={icon_size} color="black" />}
-                                            {[3, 6].includes((ranNum)) && <Icon_robotHuman _height={icon_size} _width={icon_size} />}
+                                <Grid item xs={6} md={8} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                    <Box>
+                                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', textAlign: 'center', gap: 1 }}>
+                                            <Typography variant="h6" >
+                                                {name}
+                                            </Typography>
+                                            <Chip label={`${data?.episode} ตอน`} sx={{ color: 'white', bgcolor: 'gray' }} size='small' />
                                         </Box>
-                                        <Typography sx={{ fontSize: '12px' }}>
-                                            {dataNoti && dataNoti.type.trim()}
-                                        </Typography>
+
+                                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', textAlign: 'center', gap: 1, my: 1 }}>
+                                            <Chip label={"จบ"} size='small' sx={{ color: 'white', bgcolor: "#21c3bb", px: 0.5 }} />
+                                            <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                                                {data?.title}
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', textAlign: 'center', gap: 1 }}>
+                                            <RxAvatar size={20} />
+                                            <Typography>
+                                                {data?.writer}
+                                            </Typography>
+                                            <Chip label={"ติดตาม"} size='small' sx={{ px: 0.5, color: 'white', border: '1px solid ' }} />
+                                        </Box>
+
+                                        <Box sx={{ display: 'flex', alignItems: "center", bgcolor: "#21c3bb", p: 1, mt: 1 }}>
+                                            <Box sx={{ m: 1 }}>
+                                                {[1, 4].includes((ranNum)) && <FaRobot size={icon_size} color="black" />}
+                                                {[2, 5].includes((ranNum)) && <BsPeopleFill size={icon_size} color="black" />}
+                                                {[3, 6].includes((ranNum)) && <Icon_robotHuman _height={icon_size} _width={icon_size} />}
+                                            </Box>
+                                            <Typography sx={{ fontSize: '12px' }}>
+                                                {dataNoti && dataNoti.type.trim()}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 2,
+                                            backgroundColor: '#000',
+                                            p: 2,
+                                            borderRadius: 2,
+                                        }}
+                                    >
+                                        {/* Favorite Icon */}
+                                        <IconButton sx={{ color: '#fff', border: '1px solid #fff' }}>
+                                            <FavoriteBorder />
+                                        </IconButton>
+
+                                        {/* Save Button */}
+                                        <Button
+                                            variant="outlined"
+                                            startIcon={<BookmarkBorder />}
+                                            sx={{
+                                                color: '#fff',
+                                                borderColor: '#fff',
+                                                textTransform: 'none',
+                                                borderRadius: '50px',
+                                                padding: '5px 20px',
+                                            }}
+                                        >
+                                            เพิ่มเข้าชั้น
+                                        </Button>
+
+                                        {/* Read Now Button */}
+                                        <Button
+                                            variant="contained"
+                                            startIcon={<Visibility />}
+                                            sx={{
+                                                backgroundColor: '#3bc8c9',
+                                                color: '#fff',
+                                                textTransform: 'none',
+                                                '&:hover': {
+                                                    backgroundColor: '#33b0b1',
+                                                },
+                                                borderRadius: '50px',
+                                                padding: '5px 20px',
+                                            }}
+                                        >
+                                            อ่านเลย
+                                        </Button>
                                     </Box>
                                 </Grid>
 
@@ -158,12 +220,12 @@ const ReadingDetail = () => {
                         {/* Highlighted Chip */}
                         <Chip
                             label="โรแมนติก"
-                            sx={{ fontWeight: 'bold', border: '1px solid #21c3bb' }}
+                            sx={{ fontWeight: 'bold', bgcolor: 'white', border: '1px solid #21c3bb' }}
                         />
 
                         {/* Tag Icon */}
                         <IconButton size="small">
-                            <TagIcon />
+                            <CiShoppingTag size={30} />
                         </IconButton>
 
                         {/* Dynamic Chips */}
@@ -191,12 +253,7 @@ const ReadingDetail = () => {
                     >
                         {/* Title */}
                         <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2, textAlign: 'center', color: '#333' }}>
-                            Evil Miss You คุณคนน่ามอง
-                        </Typography>
-
-                        {/* Metadata */}
-                        <Typography variant="body1" sx={{ mb: 3, color: '#555' }}>
-                            หมวด: นิยายรัก | จำนวนตอน: 15 ตอน | นักเขียน: Lta Luktarn
+                            {data?.title}
                         </Typography>
 
                         {/* Content */}
@@ -216,8 +273,8 @@ const ReadingDetail = () => {
                     </Paper>
 
                     <Box sx={{ m: 2 }}>
-                        <Button size='large' variant="contained">
-                            go to form
+                        <Button size='large' variant="contained" sx={{ bgcolor: '#21c3bb' }} onClick={() => openReadModal()}>
+                            submit form
                         </Button>
                     </Box>
                 </Container>

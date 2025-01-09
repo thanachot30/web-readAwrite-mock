@@ -71,7 +71,7 @@ const ImageGridReading = (props: Props) => {
                                     }}
                                     onClick={() => {
                                         if (item.id === 1 || item.id === 2) {
-                                            navigate(`/reading/detail?name=${props.name}&id=${item.id}`); // Navigate programmatically
+                                            navigate(`/reading/detail?name=${props.name}&id=${item.id}&story=${item.category}`); // Navigate programmatically
                                         }
                                     }}
                                 >

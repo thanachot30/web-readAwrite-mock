@@ -16,11 +16,12 @@ import { MdEditNote } from "react-icons/md";
 import { MdManageSearch } from "react-icons/md";
 import ListFixedW from '../component/ListFixedW';
 import ListWLogic from '../component/ListWLogic';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { _MockData, mockData_12 } from '../common/share';
+import { ModalContext } from '../modal/ModalEnd';
 
 const WritingPage = () => {
-
+    const { setreadPrefill } = useContext(ModalContext);
     const [value, setValue] = useState(0);
     const [data, setdata] = useState<_MockData>()
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -38,8 +39,15 @@ const WritingPage = () => {
         }
         else {
             console.log(`Object with id === ${ranNum} not found.`);
-
         }
+        //
+        const writedata = {
+            expertNumber: ranNum,
+            group: "",
+            story: "",
+            category: ""
+        }
+        setreadPrefill(writedata)
 
     }, [])
     return (
