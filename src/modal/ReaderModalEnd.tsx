@@ -6,7 +6,7 @@ import { readCategory } from '../common/share';
 
 
 const ReaderModalEnd = () => {
-    const { isOpenReadModal, readPrefill, setWebCompleteTrue } = useContext(ModalContext);
+    const { isOpenReadModal, readPrefill, setWebCompleteTrue, authen_with_email } = useContext(ModalContext);
     const [group, setgroup] = useState(''); // Default selection
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,11 +61,7 @@ const ReaderModalEnd = () => {
                     category = "Girl+Love"
                     break;
             }
-            const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLSd2UMOHBvtQzSOujYzNpjjxETdCbjpSXAx9UqrzOOlxsyrsUQ/viewform?usp=pp_url&entry.1385240585=email&entry.1343983776=${expertString}&entry.1111459747=${group}&entry.499191063=${story}&entry.675317455=${category}`;
-            //https://docs.google.com/forms/d/e/1FAIpQLSd2UMOHBvtQzSOujYzNpjjxETdCbjpSXAx9UqrzOOlxsyrsUQ/viewform?usp=pp_url&entry.1385240585=email&entry.1343983776=Author+6+(High+%E2%80%93+AI+and+Human)&entry.1111459747=Subscriber&entry.499191063=Correct+Category&entry.675317455=Original+Love
-            //https://docs.google.com/forms/d/e/1FAIpQLSd2UMOHBvtQzSOujYzNpjjxETdCbjpSXAx9UqrzOOlxsyrsUQ/viewform?usp=pp_url&entry.1385240585=email&entry.1343983776=Author+3+(Low+%E2%80%93+AI+and+Human)&entry.1111459747=Subscriber&entry.499191063=Correct+Category&entry.675317455=Original+Love
-            //https://docs.google.com/forms/d/e/1FAIpQLSd2UMOHBvtQzSOujYzNpjjxETdCbjpSXAx9UqrzOOlxsyrsUQ/viewform?usp=pp_url&entry.1385240585=email&entry.1343983776=Author+5+(High+%E2%80%93+Human)&entry.1111459747=Non-subsciber&entry.499191063=Incorrect+Category&entry.675317455=Girl+Love
-
+            const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLSe6fy0ci-P4PE7k1c8k2aB2KYAJhqHGfted9RtGzaoGl6Yr1A/viewform?usp=pp_url&entry.1385240585=${authen_with_email}&entry.1343983776=${expertString}&entry.528371891=Approve&entry.1111459747=${group}&entry.1163206236=${story}&entry.2068825976=${category}`
             setWebCompleteTrue();
             return baseUrl
         }
@@ -101,15 +97,15 @@ const ReaderModalEnd = () => {
                     /> */}
                     <Box sx={{ p: 2 }}>
                         <FormControl>
-                            <FormLabel id="subscriber-select-label">Select Your Group</FormLabel>
+                            <FormLabel id="subscriber-select-label">คุณกดติดตามนักเขียนท่านใดหรือไม่?</FormLabel>
                             <RadioGroup
                                 aria-labelledby="subscriber-select-label"
                                 name="user-type"
                                 value={group}
                                 onChange={handleChange}
                             >
-                                <FormControlLabel value="Subscriber" control={<Radio />} label="Subscriber" />
-                                <FormControlLabel value="Non-subsciber" control={<Radio />} label="Non-subsciber" />
+                                <FormControlLabel value="%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B2%E0%B8%A1+(Subscriber)" control={<Radio />} label="ผู้ติดตาม (Subscriber)" />
+                                <FormControlLabel value="%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%84%E0%B8%A1%E0%B9%88%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B2%E0%B8%A1+(Non-subsciber)" control={<Radio />} label="ผู้ที่ไม่ได้ติดตาม (Non-subsciber)" />
                             </RadioGroup>
                         </FormControl>
                     </Box>

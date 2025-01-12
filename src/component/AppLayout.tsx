@@ -72,12 +72,15 @@ const AppLayout = () => {
 
     return (
         <Box>
-            <AppBar position="fixed" color="default" elevation={0} sx={{ borderBottom: '1px solid #e0e0e0' }}>
-                <Container maxWidth="md"> {/* Container to control width */}
-                    <Toolbar sx={{ justifyContent: 'space-between', }}>
+            <AppBar position="fixed" color="default" elevation={0} sx={{
+                borderBottom: '1px solid #e0e0e0', bgcolor: '#FFFFFF'
+
+            }}>
+                <Container maxWidth="lg"> {/* Container to control width */}
+                    <Toolbar sx={{ justifyContent: 'space-between', paddingX: 2 }}>
                         {/* Left Section */}
                         <Box sx={{ display: 'flex', gap: 2 }}>
-                            <Typography variant="h6" color="textPrimary" sx={{ cursor: 'pointer' }}>
+                            <Typography variant="h6" color="textPrimary" sx={{ cursor: 'pointer', color: '#4DD0E1' }}>
                                 นิยาย
                             </Typography>
                             <Typography variant="h6" color="textPrimary" sx={{ cursor: 'pointer' }}>
@@ -95,7 +98,7 @@ const AppLayout = () => {
                             variant="h5"
                             sx={{
                                 fontWeight: 'bold',
-                                color: '#00C8FF',
+                                color: '#4DD0E1',
                                 textDecoration: 'none', // Remove underline for the link
                                 cursor: 'pointer',
                             }}>
@@ -104,13 +107,32 @@ const AppLayout = () => {
 
                         {/* Right Section */}
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                            <IconButton>
-                                <SearchIcon />
+                            <IconButton
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    width: 45, // Diameter of the circle
+                                    height: 45, // Diameter of the circle
+                                    backgroundColor: '#e0e0e0', // Light gray background
+                                    borderRadius: '50%', // Makes it a circle
+                                }}
+                            >
+                                <SearchIcon sx={{ color: 'black', fontSize: 24 }} />
                             </IconButton>
                             <Box>
-                                <IconButton onClick={handleOpenMenu} className="MuiButtonBase-root MuiIconButton-root">
+                                <IconButton onClick={handleOpenMenu} sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    width: 45, // Diameter of the circle
+                                    height: 45, // Diameter of the circle
+                                    backgroundColor: '#e0e0e0', // Light gray background
+                                    borderRadius: '50%', // Makes it a circle
+                                }} className="MuiButtonBase-root MuiIconButton-root">
+
                                     <Badge badgeContent={1} color="error" invisible={!isVisibleNoti} >
-                                        <NotificationsIcon />
+                                        <NotificationsIcon sx={{ color: 'black', fontSize: 24 }} />
                                     </Badge>
 
                                 </IconButton>
@@ -193,11 +215,33 @@ const AppLayout = () => {
                                 </Menu>
                             </Box>
 
-                            <IconButton onClick={() => navigate('/writing')}>
-                                <EditIcon />
+                            <IconButton onClick={() => navigate('/writing')}
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    width: 45, // Diameter of the circle
+                                    height: 45, // Diameter of the circle
+                                    backgroundColor: '#e0e0e0', // Light gray background
+                                    borderRadius: '50%', // Makes it a circle
+                                }}>
+
+                                <EditIcon sx={{ color: 'black', fontSize: 24 }} />
+
+
                             </IconButton>
-                            <IconButton>
-                                <AccountCircleIcon />
+                            <IconButton
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    width: 45, // Diameter of the circle
+                                    height: 45, // Diameter of the circle
+                                    backgroundColor: '#e0e0e0', // Light gray background
+                                    borderRadius: '50%', // Makes it a circle
+                                }}
+                            >
+                                <AccountCircleIcon sx={{ color: 'black', fontSize: 24 }} />
                             </IconButton>
                         </Box>
                     </Toolbar>

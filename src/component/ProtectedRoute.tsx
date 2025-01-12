@@ -6,7 +6,6 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = () => {
     const { authen_with_email } = useContext(ModalContext);
-
     return authen_with_email ? <Outlet /> : <Navigate to="/" replace />;
 }
 

@@ -5,7 +5,7 @@ import { ModalContext } from './ModalEnd';
 
 
 const WriterModalEnd = () => {
-    const { isOpenWriteModal, readPrefill, setWebCompleteTrue } = useContext(ModalContext);
+    const { isOpenWriteModal, readPrefill, setWebCompleteTrue, authen_with_email } = useContext(ModalContext);
     const [group, setgroup] = useState(''); // Default selection
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setgroup((event.target as HTMLInputElement).value);
@@ -41,12 +41,11 @@ const WriterModalEnd = () => {
             default:
                 expertString = 'Unknown Author';
         }
-        const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScKSWblfLa0OayI4b-Gmt2pGco5fUEsZXZPYLEBLTCq55EJzg/viewform?usp=pp_url&entry.1343983776=${expertString}&entry.528371891=Approve&entry.1111459747=${group}&entry.675317455=Romance+Novels&entry.619883209=Romance+Novels`
+        const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLSckD0U0kwiXKVQZxrpFEoOKTc-8Rq2v07tcJqYeUZq95EIc2A/viewform?usp=pp_url&entry.1385240585=${authen_with_email}&entry.1343983776=${expertString}&entry.528371891=Approve&entry.1111459747=${group}`
         //
         setWebCompleteTrue()
         //
         return baseUrl
-        //https://docs.google.com/forms/d/e/1FAIpQLScKSWblfLa0OayI4b-Gmt2pGco5fUEsZXZPYLEBLTCq55EJzg/viewform?usp=pp_url&entry.1343983776=Author+1+(Low+%E2%80%93+AI)&entry.528371891=Approve&entry.1111459747=Under+Publisher&entry.675317455=Romance+Novels&entry.619883209=Romance+Novels
     }
 
     return (
@@ -67,25 +66,18 @@ const WriterModalEnd = () => {
             >
                 <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <Typography variant="h6">😝 จบการทดสอบนักเขียน 🩵🩵</Typography>
-                    {/* <TextField
-                        label="Enter your email"
-                        variant="outlined"
-                        size="small"
-                        value={email}
-                        onChange={handleEmailChange}
-                        sx={{ m: 1, width: '300px' }}
-                    /> */}
+
                     <Box sx={{ p: 2 }}>
                         <FormControl>
-                            <FormLabel id="subscriber-select-label">Select Your Group</FormLabel>
+                            <FormLabel id="subscriber-select-label">คุณเป็นนักเขียนอิสระหรือสำนักพิมพ์?</FormLabel>
                             <RadioGroup
                                 aria-labelledby="subscriber-select-label"
                                 name="user-type"
                                 value={group}
                                 onChange={handleChange}
                             >
-                                <FormControlLabel value="Freelancer" control={<Radio />} label="Freelancer" />
-                                <FormControlLabel value="Under+Publisher" control={<Radio />} label="Under Publisher" />
+                                <FormControlLabel value="%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B9%80%E0%B8%82%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%AD%E0%B8%B4%E0%B8%AA%E0%B8%A3%E0%B8%B0" control={<Radio />} label="นักเขียนอิสระ (Freelancer)" />
+                                <FormControlLabel value="%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B9%80%E0%B8%82%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%A0%E0%B8%B2%E0%B8%A2%E0%B9%83%E0%B8%95%E0%B9%89%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%9E%E0%B8%B4%E0%B8%A1%E0%B8%9E%E0%B9%8C" control={<Radio />} label="นักเขียนภายใต้สำนักพิมพ์ (Under publisher)" />
                             </RadioGroup>
                         </FormControl>
                     </Box>

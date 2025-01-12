@@ -220,7 +220,7 @@ const ReadingDetail = () => {
                                 }}>
                                 {dataNoti.content?.map((item) => (
                                     <Box sx={{ bgcolor: "#21c3bb" }}>
-                                        <Typography sx={{ fontSize: '14px', px: 1, py: 0.5, color: 'white' }}>
+                                        <Typography sx={{ fontSize: '14px', px: 1, py: 0.5, color: 'white', whiteSpace: 'pre-line' }}>
                                             {item.title}
                                             {item.description}
                                         </Typography>
