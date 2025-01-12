@@ -1,27 +1,34 @@
-import { Box, CircularProgress, Modal, Typography } from '@mui/material';
-import { useContext, useEffect } from 'react'
+import { Box, Button, CircularProgress, Modal, Typography } from '@mui/material';
+import { useContext, useEffect, useState } from 'react'
 import { ModalContext } from './ModalEnd';
 
 
 
 const WriterModalShare = () => {
-    const { isShaer, closeShaer, openNoti } = useContext(ModalContext);
+    const { isShaer, closeShaer, openVisibleNoti } = useContext(ModalContext);
+    const [showBtn, setshowBtn] = useState(false)
     useEffect(() => {
         // Close the modal after 5 seconds
         if (isShaer === true) {
             const timer = setTimeout(() => {
-                closeShaer()
-                openNoti()
-                console.log("5s");
-            }, 5000);
-            return () => clearTimeout(timer); // Cleanup the timer on unmount
+                setshowBtn(true)
+                //console.log("5s");
+            }, 1500);
+            return () => {
+                clearTimeout(timer)
+                setshowBtn(false)
+            }; // Cleanup the timer on unmount
         }
-
-
     }, [isShaer]);
-
+    const handleClickOK = () => {
+        closeShaer(); // Close the modal
+        const timer = setTimeout(() => {
+            openVisibleNoti()
+        }, 3000);
+        return () => clearTimeout(timer)
+    };
     return (
-        <Modal open={isShaer} onClose={() => closeShaer()}>
+        <Modal open={isShaer}>
             <Box
                 sx={{
                     position: 'absolute',
@@ -44,7 +51,28 @@ const WriterModalShare = () => {
                     <br />
                     โดยขณะนี้เนื้อหาของคุณจะยังเผยแพร่อยู่ในหมวดตั้งต้น
                 </Typography>
-                <CircularProgress sx={{ color: '#26C6DA' }} />
+                {!showBtn && <CircularProgress sx={{ color: '#26C6DA' }} />}
+
+                {showBtn && <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleClickOK}
+                    sx={{
+                        fontSize: '13px',
+                        width: 100,
+                        textTransform: 'none', // Prevent uppercase transformation
+                        backgroundColor: '#4DD0E1', // Teal background color
+                        color: '#FFFFFF', // White text color
+                        borderRadius: '24px', // Fully rounded corners
+                        padding: '8px 24px', // Padding for a balanced look
+                        '&:hover': {
+                            backgroundColor: '#26C6DA', // Darker teal on hover
+                        },
+                    }}
+                >
+                    OK
+                </Button>}
+
             </Box>
         </Modal>
     )

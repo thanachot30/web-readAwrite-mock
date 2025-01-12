@@ -15,11 +15,14 @@ const Home = () => {
 
             <Container maxWidth="lg"
             >
-                <ImageGrid data={Data_LoveNovel} title={'นิยายรัก Love Novel'} name='LoveNovel' />
-                {/*  */}
-                <ImageGrid data={Data_BoyLoveNovel} title={'นิยายรัก Boy Love Novel'} name='BoyLoveNovel' />
-                {/*  */}
-                <ImageGrid data={Data_GirlLoveNovel} title={'นิยายรัก Girl Love Novel'} name='GirlLoveNovel' />
+                <Box sx={{ py: 3 }}>
+                    <ImageGrid data={Data_LoveNovel} title={'นิยายรัก Love Novel'} name='LoveNovel' />
+                    {/*  */}
+                    <ImageGrid data={Data_BoyLoveNovel} title={'นิยายรัก Boy Love Novel'} name='BoyLoveNovel' />
+                    {/*  */}
+                    <ImageGrid data={Data_GirlLoveNovel} title={'นิยายรัก Girl Love Novel'} name='GirlLoveNovel' />
+                </Box>
+
             </Container>
         </Box>
 

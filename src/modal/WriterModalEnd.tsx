@@ -5,7 +5,7 @@ import { ModalContext } from './ModalEnd';
 
 
 const WriterModalEnd = () => {
-    const { isOpenWriteModal, readPrefill } = useContext(ModalContext);
+    const { isOpenWriteModal, readPrefill, setWebCompleteTrue } = useContext(ModalContext);
     const [group, setgroup] = useState(''); // Default selection
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setgroup((event.target as HTMLInputElement).value);
@@ -13,8 +13,6 @@ const WriterModalEnd = () => {
     const generateFormLink = () => {
 
         let expertString = ''
-        console.log(readPrefill.expertNumber);
-
         switch (readPrefill.expertNumber) {
             case 1:
             case 7:
@@ -44,7 +42,9 @@ const WriterModalEnd = () => {
                 expertString = 'Unknown Author';
         }
         const baseUrl = `https://docs.google.com/forms/d/e/1FAIpQLScKSWblfLa0OayI4b-Gmt2pGco5fUEsZXZPYLEBLTCq55EJzg/viewform?usp=pp_url&entry.1343983776=${expertString}&entry.528371891=Approve&entry.1111459747=${group}&entry.675317455=Romance+Novels&entry.619883209=Romance+Novels`
-
+        //
+        setWebCompleteTrue()
+        //
         return baseUrl
         //https://docs.google.com/forms/d/e/1FAIpQLScKSWblfLa0OayI4b-Gmt2pGco5fUEsZXZPYLEBLTCq55EJzg/viewform?usp=pp_url&entry.1343983776=Author+1+(Low+%E2%80%93+AI)&entry.528371891=Approve&entry.1111459747=Under+Publisher&entry.675317455=Romance+Novels&entry.619883209=Romance+Novels
     }
@@ -93,7 +93,8 @@ const WriterModalEnd = () => {
                     <Button
                         disabled={group != '' ? false : true}
                         component="a" // Use 'a' element for navigation
-                        href={generateFormLink()}
+                        onClick={() => window.open(generateFormLink(), '_blank')}
+                        //href={generateFormLink()}
                         target="_blank" // Open in a new tab    
                         rel="noopener noreferrer" // For security reasons
                         //sx={{ mt: 2, ml: 2 }} // Margin for spacing

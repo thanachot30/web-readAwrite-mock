@@ -6,7 +6,7 @@ import { readCategory } from '../common/share';
 
 
 const ReaderModalEnd = () => {
-    const { isOpenReadModal, readPrefill } = useContext(ModalContext);
+    const { isOpenReadModal, readPrefill, setWebCompleteTrue } = useContext(ModalContext);
     const [group, setgroup] = useState(''); // Default selection
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +65,8 @@ const ReaderModalEnd = () => {
             //https://docs.google.com/forms/d/e/1FAIpQLSd2UMOHBvtQzSOujYzNpjjxETdCbjpSXAx9UqrzOOlxsyrsUQ/viewform?usp=pp_url&entry.1385240585=email&entry.1343983776=Author+6+(High+%E2%80%93+AI+and+Human)&entry.1111459747=Subscriber&entry.499191063=Correct+Category&entry.675317455=Original+Love
             //https://docs.google.com/forms/d/e/1FAIpQLSd2UMOHBvtQzSOujYzNpjjxETdCbjpSXAx9UqrzOOlxsyrsUQ/viewform?usp=pp_url&entry.1385240585=email&entry.1343983776=Author+3+(Low+%E2%80%93+AI+and+Human)&entry.1111459747=Subscriber&entry.499191063=Correct+Category&entry.675317455=Original+Love
             //https://docs.google.com/forms/d/e/1FAIpQLSd2UMOHBvtQzSOujYzNpjjxETdCbjpSXAx9UqrzOOlxsyrsUQ/viewform?usp=pp_url&entry.1385240585=email&entry.1343983776=Author+5+(High+%E2%80%93+Human)&entry.1111459747=Non-subsciber&entry.499191063=Incorrect+Category&entry.675317455=Girl+Love
+
+            setWebCompleteTrue();
             return baseUrl
         }
     };
@@ -115,7 +117,7 @@ const ReaderModalEnd = () => {
                     <Button
                         disabled={group != '' ? false : true}
                         component="a" // Use 'a' element for navigation
-                        href={generateFormLink()}
+                        onClick={() => window.open(generateFormLink(), '_blank')}
                         target="_blank" // Open in a new tab    
                         rel="noopener noreferrer" // For security reasons
                         //sx={{ mt: 2, ml: 2 }} // Margin for spacing

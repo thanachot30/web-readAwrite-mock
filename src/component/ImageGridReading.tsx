@@ -41,17 +41,42 @@ const ImageGridReading = (props: Props) => {
                                 borderRadius: 2,
                             }}
                         >
-                            <img
-                                src={item.image}
-                                alt={item.title}
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    objectFit: 'cover',
-                                    borderRadius: '8px',
-                                }}
-                            />
+                            <Box>
+                                <img
+                                    src={item.image}
+                                    alt={item.title}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                        borderRadius: '8px',
+                                    }}
+                                />
+                            </Box>
+                            {item.tag &&
+                                <Box
+                                    sx={{
+                                        position: 'absolute',
+                                        top: 15, // Position from the top
+                                        right: 243, // Position from the right
+                                        backgroundColor: '#21c3bb', // Button color
+                                        color: 'white',
+                                        padding: '4px 12px', // Adjust padding for oval shape
+                                        borderRadius: '16px', // High value for a pill/oval shape
+                                        fontSize: '12px',
+                                        fontWeight: 'bold',
+                                        zIndex: 1, // Ensure it stays above the image
+                                        display: 'inline-block', // Ensure proper layout
+                                        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+                                    }}
+                                >
+                                    {"จัดการ"}
+                                </Box>
+                            }
+
+
                         </Box>
+
 
                         {/* Text Content Section */}
                         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, ml: 1 }}>

@@ -39,7 +39,7 @@ const ImageGrid = (props: Props) => {
                     component={Link} // Use Link for navigation
                     to={`/reading?name=${props.name}&title=${props.title}`} // Navigate to '/'
                     sx={{
-                        fontSize: '12px', fontWeight: 'bold', color: '#21c3bb', textDecoration: 'none', // Remove underline for the link
+                        fontSize: '14px', fontWeight: 'bold', color: '#21c3bb', textDecoration: 'none', // Remove underline for the link
                         cursor: 'pointer',
                     }}>
                     ดูทั้งหมด
@@ -103,12 +103,29 @@ const ImageGrid = (props: Props) => {
                                         }}
                                     />
                                 </Box>
-
+                                {item.tag &&
+                                    <Box
+                                        sx={{
+                                            position: 'absolute',
+                                            top: 8, // Position from the top
+                                            right: 25, // Position from the right
+                                            backgroundColor: '#21c3bb', // Button color
+                                            color: 'white',
+                                            padding: '4px 12px', // Adjust padding for oval shape
+                                            borderRadius: '16px', // High value for a pill/oval shape
+                                            fontSize: '12px',
+                                            fontWeight: 'bold',
+                                            zIndex: 1, // Ensure it stays above the image
+                                            display: 'inline-block', // Ensure proper layout
+                                            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+                                        }}
+                                    >
+                                        {"จัดการ"}
+                                    </Box>
+                                }
                                 <Box>
                                     <InfoImageGrid status={item.status} title={item.title} writer={item.writer} />
                                 </Box>
-
-
                             </ImageListItem>
 
                         </Box>

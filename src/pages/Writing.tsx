@@ -165,18 +165,20 @@ const WritingPage = () => {
                     </Select>
                 </Box>
 
-                <Button variant="contained" sx={{
-                    fontSize: '13px',
-                    width: 170,
-                    textTransform: 'none', // Prevent uppercase transformation
-                    backgroundColor: '#4DD0E1', // Teal background color
-                    color: '#FFFFFF', // White text color
-                    borderRadius: '24px', // Fully rounded corners
-                    padding: '8px 24px', // Padding for a balanced look
-                    '&:hover': {
-                        backgroundColor: '#26C6DA', // Darker teal on hover
-                    },
-                }}>
+                <Button variant="contained"
+                    sx={{
+                        fontSize: '13px',
+                        width: 170,
+                        textTransform: 'none', // Prevent uppercase transformation
+                        backgroundColor: '#4DD0E1', // Teal background color
+                        color: '#FFFFFF', // White text color
+                        borderRadius: '24px', // Fully rounded corners
+                        padding: '8px 24px', // Padding for a balanced look
+                        '&:hover': {
+                            backgroundColor: '#26C6DA', // Darker teal on hover
+                        },
+                    }}
+                >
                     เพิ่มงานเขียน
                 </Button>
             </Box>
@@ -185,8 +187,6 @@ const WritingPage = () => {
                 {data?.data_fixed && <ListFixedW data={data} />}
 
             </Box>
-
-
         </Container>
     );
 };

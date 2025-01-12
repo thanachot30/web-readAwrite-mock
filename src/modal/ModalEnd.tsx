@@ -35,6 +35,14 @@ interface ModalContextValue {
     setEmail: (e: string) => void;
     readPrefill: readForm
     setreadPrefill: (e: readForm) => void;
+    //
+    isVisibleNoti: boolean
+    openVisibleNoti: () => void
+    closeVisibleNoti: () => void
+    //
+    isWebComplete: boolean
+    setWebCompleteTrue: () => void
+    setWebCompleteFalse: () => void
 
 }
 
@@ -68,7 +76,13 @@ export const ModalContext = createContext<ModalContextValue>({
         story: '',
         category: ''
     },
-    setreadPrefill: () => { }
+    setreadPrefill: () => { },
+    isVisibleNoti: false,
+    openVisibleNoti: () => { },
+    closeVisibleNoti: () => { },
+    isWebComplete: false,
+    setWebCompleteTrue: () => { },
+    setWebCompleteFalse: () => { },
 });
 
 const ModalEnd: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -76,10 +90,12 @@ const ModalEnd: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isNoti, setIsNoti] = useState(false)
     const [noti, setnoti] = useState("")
     const [isShaer, setshare] = useState(false)
+    const [isVisibleNoti, setisVisibleNoti] = useState(false)
     //
     const [isOpenReadModal, setisOpenReadModal] = useState(false)
     const [isOpenWriteModal, setisOpenWriteModal] = useState(false)
     const [authen_with_email, setauthen_with_email] = useState("")
+    const [isWebComplete, setisWebComplete] = useState(false)
 
     const [readPrefill, set_readPrefill] = useState({
         expertNumber: 0,
@@ -107,6 +123,12 @@ const ModalEnd: React.FC<{ children: ReactNode }> = ({ children }) => {
     const setEmail = (e: string) => setauthen_with_email(e)
     //
     const setreadPrefill = (e: readForm) => set_readPrefill(e)
+    //
+    const openVisibleNoti = () => setisVisibleNoti(true)
+    const closeVisibleNoti = () => setisVisibleNoti(false)
+    //
+    const setWebCompleteTrue = () => setisWebComplete(true)
+    const setWebCompleteFalse = () => setisWebComplete(false)
 
     return (
         <ModalContext.Provider value={{
@@ -130,7 +152,13 @@ const ModalEnd: React.FC<{ children: ReactNode }> = ({ children }) => {
             setreadPrefill,
             isShaer,
             openShaer,
-            closeShaer
+            closeShaer,
+            isVisibleNoti,
+            openVisibleNoti,
+            closeVisibleNoti,
+            isWebComplete,
+            setWebCompleteTrue,
+            setWebCompleteFalse
         }}>
             {children}
         </ModalContext.Provider>

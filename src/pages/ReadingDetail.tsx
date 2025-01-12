@@ -28,7 +28,6 @@ const ReadingDetail = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0); // Scroll to top
-        console.log('name', name, id);
         switch (name) {
             case "LoveNovel":
                 const _data = Data_LoveNovel.find((item) => item.id === Number(id))
@@ -135,7 +134,7 @@ const ReadingDetail = () => {
                                                 {[2, 5].includes((ranNum)) && <BsPeopleFill size={icon_size} color="black" />}
                                                 {[3, 6].includes((ranNum)) && <Icon_robotHuman _height={icon_size} _width={icon_size} />}
                                             </Box>
-                                            <Typography sx={{ fontSize: '12px' }}>
+                                            <Typography sx={{ fontSize: '14px' }}>
                                                 {dataNoti && dataNoti.type.trim()}
                                             </Typography>
                                         </Box>
@@ -192,30 +191,46 @@ const ReadingDetail = () => {
                                 </Grid>
 
                                 <Grid item xs={6} md={4}>
-
-                                    {dataNoti && dataNoti.content?.map((item) => (
+                                    {/* {dataNoti && dataNoti.content?.map((item) => (
                                         <Box sx={{ bgcolor: "#21c3bb" }}>
-                                            <Typography sx={{ fontSize: '8px', px: 1, py: 1 }}>
+                                            <Typography sx={{ fontSize: '12px', px: 1, py: 1 }}>
                                                 {item.title}
                                                 {item.description}
                                             </Typography>
                                         </Box>
 
-                                    ))}
-
-
+                                    ))} */}
                                 </Grid>
                             </Grid>
-
                         </Grid>
                     </Grid>
                 </Container>
             </Box>
 
-
             {/* story */}
             <Box>
                 <Container maxWidth="lg" >
+                    {
+                        dataNoti && dataNoti.content && <Box>
+                            <Paper elevation={2}
+                                sx={{
+                                    p: 1,
+                                    //backgroundColor: '#21c3bb', // Light paper-like background
+                                    bgcolor: '#21c3bb'
+                                }}>
+                                {dataNoti.content?.map((item) => (
+                                    <Box sx={{ bgcolor: "#21c3bb" }}>
+                                        <Typography sx={{ fontSize: '14px', px: 1, py: 0.5, color: 'white' }}>
+                                            {item.title}
+                                            {item.description}
+                                        </Typography>
+                                    </Box>
+
+                                ))}
+                            </Paper>
+                        </Box>
+                    }
+
                     <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 1, p: 2 }}>
                         {/* Highlighted Chip */}
                         <Chip
@@ -266,10 +281,7 @@ const ReadingDetail = () => {
                                     {line}
                                 </Typography>
                             ))}
-
                         </Box>
-
-
                     </Paper>
 
                     <Box sx={{ m: 2 }}>

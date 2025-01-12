@@ -19,7 +19,6 @@ const Reading = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0); // Scroll to top
-        console.log('name', name, title);
         switch (name) {
             case "LoveNovel":
                 setdata(Data_LoveNovel)

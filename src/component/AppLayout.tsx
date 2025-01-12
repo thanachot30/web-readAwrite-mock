@@ -20,13 +20,13 @@ import GlobalModal from '../modal/GlobalModal';
 import ReaderModalEnd from '../modal/ReaderModalEnd';
 import WriterModalEnd from '../modal/WriterModalEnd';
 import WriterModalShare from '../modal/WriterModalShare';
+import EmailAuthModal from '../modal/EmailAuthModal';
 
 const AppLayout = () => {
-    const { isNoti, openNoti, closeNoti, noti, openWriteModal } = useContext(ModalContext);
+    const { isNoti, openNoti, closeNoti, noti, openWriteModal, isVisibleNoti, closeVisibleNoti } = useContext(ModalContext);
     const [anchorEl, setAnchorEl] = useState<Element | null>(null); // State for the menu anchor
     const [tabValue, setTabValue] = useState(0);
     const [notiMessage, setNotiMessage] = useState<string>()
-    const [invisibleBadge, setinvisibleBadge] = useState(true)
     // const open = Boolean(anchorEl);
     const icon_size = 60
 
@@ -38,7 +38,9 @@ const AppLayout = () => {
     const handleCloseMenu = () => {
         setAnchorEl(null);
         closeNoti()
-        openWriteModal()
+        if (notiMessage != "") {
+            openWriteModal()//end modal
+        }
 
     };
     const handleTabChange = (_event: any, newValue: any) => {
@@ -60,12 +62,13 @@ const AppLayout = () => {
                 return e.id === parseInt(noti)
             })
             setNotiMessage(find_mockData?.type)
-            setinvisibleBadge(false)
+            //setinvisibleBadge(false)
         } else {
             setNotiMessage("")
-            setinvisibleBadge(true)
+            //setinvisibleBadge(true)
+            closeVisibleNoti()
         }
-    }, [isNoti])//noti//isNoti
+    }, [noti])
 
     return (
         <Box>
@@ -106,7 +109,7 @@ const AppLayout = () => {
                             </IconButton>
                             <Box>
                                 <IconButton onClick={handleOpenMenu} className="MuiButtonBase-root MuiIconButton-root">
-                                    <Badge badgeContent={1} color="error" invisible={invisibleBadge} >
+                                    <Badge badgeContent={1} color="error" invisible={!isVisibleNoti} >
                                         <NotificationsIcon />
                                     </Badge>
 
@@ -202,11 +205,13 @@ const AppLayout = () => {
             </AppBar>
 
             <Box component="main" sx={{ pt: 6 }}>
+
                 <Outlet />
                 <GlobalModal />
                 <ReaderModalEnd />
                 <WriterModalEnd />
                 <WriterModalShare />
+                <EmailAuthModal />
             </Box>
 
         </Box>

@@ -59,7 +59,7 @@ const ListWLogic: React.FC<ListWLogicProps> = ({ data }) => {
 
     useEffect(() => {
         const ranNum = Math.floor(Math.random() * data.data_random.length);
-        console.log("ranNum", data.data_random.length, data.data_random[ranNum], ranNum);
+        //console.log("ranNum", data.data_random.length, data.data_random[ranNum], ranNum);
         set_data_random([data.data_random[ranNum]]);
 
     }, [])
